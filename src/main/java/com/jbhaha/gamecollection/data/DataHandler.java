@@ -28,11 +28,14 @@ public class DataHandler {
         setGameList(new ArrayList<>());
         readGamesJSON();
         setFranchiseList(new ArrayList<>());
-        readFranchiseJSON();
+        readFranchisesJSON();
+        setStudioList(new ArrayList<>());
+        readStudiosJSON();
     }
 
     /**
      * gets the only instance of this class
+     *
      * @return
      */
     public static DataHandler getInstance() {
@@ -44,6 +47,7 @@ public class DataHandler {
 
     /**
      * reads all games
+     *
      * @return list of games
      */
     public List<Game> readAllGames() {
@@ -52,6 +56,7 @@ public class DataHandler {
 
     /**
      * reads a game by its uuid
+     *
      * @param gameUUID
      * @return the game (null=not found)
      */
@@ -67,6 +72,7 @@ public class DataHandler {
 
     /**
      * reads all franchises
+     *
      * @return list of franchises
      */
     public List<Franchise> readAllFranchises() {
@@ -76,10 +82,11 @@ public class DataHandler {
 
     /**
      * reads a franchise by its uuid
+     *
      * @param franchiseUUID
      * @return the franchise (null=not found)
      */
-    public Franchise readPublisherByUUID(String franchiseUUID) {
+    public Franchise readFranchiseByUUID(String franchiseUUID) {
         Franchise franchise = null;
         for (Franchise entry : getFranchiseList()) {
             if (entry.getFranchiseUUID().equals(franchiseUUID)) {
@@ -87,6 +94,31 @@ public class DataHandler {
             }
         }
         return franchise;
+    }
+
+    /**
+     * reads all studios
+     *
+     * @return list of studios
+     */
+    public List<Studio> readAllStudios() {
+        return getStudioList();
+    }
+
+    /**
+     * reads a studio by its uuid
+     *
+     * @param studioUUID
+     * @return the studio (null=not found)
+     */
+    public Studio readStudioByUUID(String studioUUID) {
+        Studio studio = null;
+        for (Studio entry : getStudioList()) {
+            if (entry.getStudioUUID().equals(studioUUID)) {
+                studio = entry;
+            }
+        }
+        return studio;
     }
 
     /**
@@ -111,11 +143,11 @@ public class DataHandler {
     /**
      * reads the franchises from the JSON-file
      */
-    private void readFranchiseJSON() {
+    private void readFranchisesJSON() {
         try {
             byte[] jsonData = Files.readAllBytes(
                     Paths.get(
-                            Config.getProperty("franchiseJSON")
+                            Config.getProperty("franchisesJSON")
                     )
             );
             ObjectMapper objectMapper = new ObjectMapper();
@@ -127,10 +159,30 @@ public class DataHandler {
             ex.printStackTrace();
         }
     }
+
+    /**
+     * reads the studios from the JSON-file
+     */
+    private void readStudiosJSON() {
+        try {
+            String path = Config.getProperty("studiosJSON");
+            byte[] jsonData = Files.readAllBytes(
+                    Paths.get(path)
+            );
+            ObjectMapper objectMapper = new ObjectMapper();
+            Studio[] studios = objectMapper.readValue(jsonData, Studio[].class);
+            for (Studio studio : studios) {
+                getStudioList().add(studio);
+            }
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+    }
+
     /**
      * gets gameList
      *
-     * @return value of bookList
+     * @return value of gameList
      */
     private List<Game> getGameList() {
         return gameList;
@@ -163,5 +215,11 @@ public class DataHandler {
         this.franchiseList = franchiseList;
     }
 
+    public List<Studio> getStudioList() {
+        return studioList;
+    }
 
+    public void setStudioList(List<Studio> studioList) {
+        this.studioList = studioList;
+    }
 }

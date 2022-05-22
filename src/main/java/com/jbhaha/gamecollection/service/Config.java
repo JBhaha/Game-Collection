@@ -29,6 +29,7 @@ public class Config extends Application {
     public Set<Class<?>> getClasses() {
         HashSet providers = new HashSet<Class<?>>();
         providers.add(com.jbhaha.gamecollection.service.TestService.class);
+        providers.add(com.jbhaha.gamecollection.service.GameService.class);
         return providers;
     }
 
@@ -72,6 +73,4 @@ public class Config extends Application {
     private static void setProperties(Properties properties) {
         Config.properties = properties;
     }
-}
-
 }
