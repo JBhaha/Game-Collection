@@ -30,6 +30,8 @@ public class Config extends Application {
         HashSet providers = new HashSet<Class<?>>();
         providers.add(com.jbhaha.gamecollection.service.TestService.class);
         providers.add(com.jbhaha.gamecollection.service.GameService.class);
+        providers.add(com.jbhaha.gamecollection.service.FranchiseService.class);
+        providers.add(com.jbhaha.gamecollection.service.StudioService.class);
         return providers;
     }
 

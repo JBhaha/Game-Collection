@@ -1,6 +1,7 @@
 package com.jbhaha.gamecollection.model;
 
 import java.time.LocalDate;
+import java.util.LinkedHashMap;
 
 public class Studio {
 
@@ -29,8 +30,8 @@ public class Studio {
         return founded;
     }
 
-    public void setFounded(LocalDate founded) {
-        this.founded = founded;
+    public void setFounded(LinkedHashMap<String, Integer> founded) {
+        this.founded = LocalDate.of(founded.get("year"), founded.get("month"), founded.get("day"));
     }
 
     public String getLocation() {

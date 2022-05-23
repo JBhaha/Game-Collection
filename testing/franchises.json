@@ -1,0 +1,70 @@
+[
+    {
+        "franchiseUUID": "439dbd42-aa80-4bf9-92f2-4256c07a600f",
+        "franchise": "Minecraft",
+        "genre": "Sandbox",
+        "games": 4,
+        "studio": {
+            "studioUUID": "c3f8b9d8-c436-4b28-b38d-482ad8240f32",
+            "studio": "Mojang Studios",
+            "founded": {
+                "year": 2009,
+                "month": 5,
+                "day": 17
+            },
+            "location": "Stockholm, Sweden, GMT +1"
+        },
+        "gameList": [{}]
+    },
+    {
+        "franchiseUUID": "7954ee76-cceb-4f3d-887c-7b933351712d",
+        "franchise": "Cyberpunk",
+        "genre": "Science-Fiction",
+        "games": 1,
+        "studio": {
+            "studioUUID": "b0aa7901-e783-41bc-b963-496de2a8ce2b",
+            "studio": "CD Project RED",
+            "founded": {
+                "year": 2002,
+                "month": 1,
+                "day": 1
+            },
+            "location": "Warsaw, Poland, GMT +1"
+        },
+        "gameList": [{}]
+    },
+    {
+        "franchiseUUID": "b5786c04-9b85-44f0-9116-04c060e2bd14",
+        "franchise": "Tom Clancy's Rainbow Six",
+        "genre": "Ego-Shooter",
+        "games": 2,
+        "studio": {
+            "studioUUID": "fe493c72-8b32-4201-a6d7-5c80628b5442",
+            "studio": "Ubisoft Montreal",
+            "founded": {
+                "year": 1997,
+                "month": 1,
+                "day": 1
+            },
+            "location": "Montreal, Canada, GMT -5"
+        },
+        "gameList": [{}]
+    },
+    {
+        "franchiseUUID": "5f83e500-4d84-47a8-9c61-3cdaaa11ba9a",
+        "franchise": "Flight Simulator",
+        "genre": "Amateur flight simulation",
+        "games": 2,
+        "studio": {
+            "studioUUID": "e6e6e0b2-785c-4736-b682-b6f9dc0377a5",
+            "studio": "Xbox Game Studios",
+            "founded": {
+                "year": 2000,
+                "month": 3,
+                "day": 1
+            },
+            "location": "Washington DC, USA, GMT -5"
+        },
+        "gameList": [{}]
+    }
+]

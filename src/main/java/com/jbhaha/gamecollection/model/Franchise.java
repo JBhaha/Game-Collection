@@ -8,6 +8,7 @@ public class Franchise {
     private String franchise;
     private String genre;
     private Integer games;
+    private Studio studio;
     private Vector<Game> gameList;
 
     public String getFranchiseUUID() {
@@ -48,5 +49,13 @@ public class Franchise {
 
     public void setGameList(Vector<Game> gameList) {
         this.gameList = gameList;
+    }
+
+    public Studio getStudio() {
+        return studio;
+    }
+
+    public void setStudio(Studio studio) {
+        this.studio = studio;
     }
 }

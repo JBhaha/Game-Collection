@@ -1,6 +1,7 @@
 package com.jbhaha.gamecollection.model;
 
 import java.time.LocalDate;
+import java.util.LinkedHashMap;
 
 public class Game {
 
@@ -28,7 +29,7 @@ public class Game {
         return release;
     }
 
-    public void setRelease(LocalDate release) {
-        this.release = release;
+    public void setRelease(LinkedHashMap<String, Integer> release) {
+        this.release = LocalDate.of(release.get("year"), release.get("month"), release.get("day"));
     }
 }
