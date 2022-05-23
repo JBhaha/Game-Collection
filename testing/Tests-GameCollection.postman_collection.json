@@ -1,0 +1,414 @@
+{
+	"info": {
+		"_postman_id": "33f91a68-6760-4eef-9c8a-22a4d56e37ab",
+		"name": "Tests-GameCollection",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "0.1: Testservice",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/Game-Collection-1.0/resource/test/test",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"Game-Collection-1.0",
+						"resource",
+						"test",
+						"test"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "1.0 List all games",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status test\", function(){",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Validate response\", function(){",
+							"    pm.response.to.be.json;",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/Game-Collection-1.0/resource/game/list",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"Game-Collection-1.0",
+						"resource",
+						"game",
+						"list"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "1.1 Read game",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status test\", function(){",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Validate response\", function(){",
+							"    pm.response.to.be.json;",
+							"    const responseJSON = pm.response.json();",
+							"    pm.expect(responseJSON.title).to.eql(\"Minecraft: Java Edition\");",
+							"    pm.expect(responseJSON.release).to.eql(\"2011-11-18\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/Game-Collection-1.0/resource/game/read?uuid=2cb978ea-c305-4982-a1dd-cf93bffa9baa",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"Game-Collection-1.0",
+						"resource",
+						"game",
+						"read"
+					],
+					"query": [
+						{
+							"key": "uuid",
+							"value": "2cb978ea-c305-4982-a1dd-cf93bffa9baa"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "1.2 Read game not found",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status test\", function(){",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/Game-Collection-1.0/resource/game/read?uuid=2cb978ea-c305-4982-a1dd-cf93bffa9bac",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"Game-Collection-1.0",
+						"resource",
+						"game",
+						"read"
+					],
+					"query": [
+						{
+							"key": "uuid",
+							"value": "2cb978ea-c305-4982-a1dd-cf93bffa9bac"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "1.3 List all franchises",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status test\", function(){",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Validate response\", function(){",
+							"    pm.response.to.be.json;",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/Game-Collection-1.0/resource/franchise/list",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"Game-Collection-1.0",
+						"resource",
+						"franchise",
+						"list"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "1.4 Read franchise",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status test\", function(){",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Validate response\", function(){",
+							"    pm.response.to.be.json;",
+							"    const responseJSON = pm.response.json();",
+							"    pm.expect(responseJSON.franchise).to.eql(\"Cyberpunk\");",
+							"    pm.expect(responseJSON.genre).to.eql(\"Science-Fiction\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/Game-Collection-1.0/resource/franchise/read?uuid=7954ee76-cceb-4f3d-887c-7b933351712d",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"Game-Collection-1.0",
+						"resource",
+						"franchise",
+						"read"
+					],
+					"query": [
+						{
+							"key": "uuid",
+							"value": "7954ee76-cceb-4f3d-887c-7b933351712d"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "1.5 Read franchise not found",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status test\", function(){",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/Game-Collection-1.0/resource/franchise/read?uuid=7954ee76-cceb-4f3d-887c-7b933351712e",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"Game-Collection-1.0",
+						"resource",
+						"franchise",
+						"read"
+					],
+					"query": [
+						{
+							"key": "uuid",
+							"value": "7954ee76-cceb-4f3d-887c-7b933351712e"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "1.6 List all studios",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status test\", function(){",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Validate response\", function(){",
+							"    pm.response.to.be.json;",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/Game-Collection-1.0/resource/studio/list",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"Game-Collection-1.0",
+						"resource",
+						"studio",
+						"list"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "1.7 Read studio",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status test\", function(){",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Validate response\", function(){",
+							"    pm.response.to.be.json;",
+							"    const responseJSON = pm.response.json();",
+							"    pm.expect(responseJSON.studio).to.eql(\"Xbox Game Studios\");",
+							"    pm.expect(responseJSON.location).to.eql(\"Washington DC, USA, GMT -5\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/Game-Collection-1.0/resource/studio/read?uuid=e6e6e0b2-785c-4736-b682-b6f9dc0377a5",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"Game-Collection-1.0",
+						"resource",
+						"studio",
+						"read"
+					],
+					"query": [
+						{
+							"key": "uuid",
+							"value": "e6e6e0b2-785c-4736-b682-b6f9dc0377a5"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "1.8 Read studio not found",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status test\", function(){",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/Game-Collection-1.0/resource/studio/read?uuid=e6e6e0b2-785c-4736-b682-b6f9dc0377a6",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"Game-Collection-1.0",
+						"resource",
+						"studio",
+						"read"
+					],
+					"query": [
+						{
+							"key": "uuid",
+							"value": "e6e6e0b2-785c-4736-b682-b6f9dc0377a6"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

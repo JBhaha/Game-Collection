@@ -1,6 +1,6 @@
 package com.jbhaha.gamecollection.model;
 
-public class user {
+public class User {
 
     private String userUUID;
     private String userName;

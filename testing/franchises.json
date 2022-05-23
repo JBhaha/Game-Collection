@@ -14,7 +14,17 @@
             },
             "location": "Stockholm, Sweden, GMT +1"
         },
-        "gameList": [{}]
+        "gameList": [
+            {
+        "gameUUID": "2cb978ea-c305-4982-a1dd-cf93bffa9baa",
+        "title": "Minecraft: Java Edition",
+        "release": {
+            "year": 2011,
+            "month": 11,
+            "day": 18
+        }
+    }
+        ]
     },
     {
         "franchiseUUID": "7954ee76-cceb-4f3d-887c-7b933351712d",
@@ -31,7 +41,17 @@
             },
             "location": "Warsaw, Poland, GMT +1"
         },
-        "gameList": [{}]
+        "gameList": [
+            {
+        "gameUUID": "5dcfedb9-a3e8-4a8e-8365-59c44be8259a",
+        "title": "Cyberpunk 2077",
+        "release": {
+            "year": 2020,
+            "month": 12,
+            "day": 10
+        }
+    }
+        ]
     },
     {
         "franchiseUUID": "b5786c04-9b85-44f0-9116-04c060e2bd14",
@@ -48,7 +68,17 @@
             },
             "location": "Montreal, Canada, GMT -5"
         },
-        "gameList": [{}]
+        "gameList": [
+            {
+        "gameUUID": "8a7eaf0c-2e00-4b5c-ad86-0e374fb1db01",
+        "title": "Tom Clancy's Rainbow Six Siege",
+        "release": {
+            "year": 2015,
+            "month": 12,
+            "day": 1
+        }
+    }
+        ]
     },
     {
         "franchiseUUID": "5f83e500-4d84-47a8-9c61-3cdaaa11ba9a",
@@ -65,6 +95,16 @@
             },
             "location": "Washington DC, USA, GMT -5"
         },
-        "gameList": [{}]
+        "gameList": [
+            {
+        "gameUUID": "76a40135-d6d7-472f-8d75-d80db027dcbd",
+        "title": "Microsoft Flight Simulator",
+        "release": {
+            "year": 2020,
+            "month": 8,
+            "day": 18
+        }
+    }
+        ]
     }
 ]

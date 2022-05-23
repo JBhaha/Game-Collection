@@ -17,7 +17,10 @@ public class GameService {
     @GET
     @Path("list")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response listGames() {
+    public Response listGames(
+            @QueryParam("sort") String sortField,
+            @QueryParam("order") String sortOrder
+    ) {
 
         List<Game> gameMap = DataHandler.getInstance().readAllGames();
 
