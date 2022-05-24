@@ -12,9 +12,16 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.util.List;
 
+/**
+ * StudioService class
+ */
 @Path("studio")
 public class StudioService {
 
+    /**
+     * list with all studios
+     * @return response with list of studios in json format
+     */
     @GET
     @Path("list")
     @Produces(MediaType.APPLICATION_JSON)
@@ -28,15 +35,33 @@ public class StudioService {
                 .build();
     }
 
+    /**
+     * shows one studio with the specified UUID
+     * @param studioUUID
+     * @return response with one studio in json format
+     */
     @GET
     @Path("read")
     @Produces(MediaType.APPLICATION_JSON)
     public Response readStudio(
             @QueryParam("uuid") String studioUUID
     ){
-        Studio studio = DataHandler.getInstance().readStudioByUUID(studioUUID);
+        Studio studio = null;
+        int httpStatus;
+
+        try {
+            studio = DataHandler.getInstance().readStudioByUUID(studioUUID);
+            if (studio == null){
+                httpStatus = 404;
+            } else {
+                httpStatus = 200;
+            }
+        } catch (IllegalArgumentException argEx){
+            httpStatus = 400;
+        }
+
         return Response
-                .status(200)
+                .status(httpStatus)
                 .entity(studio)
                 .build();
     }

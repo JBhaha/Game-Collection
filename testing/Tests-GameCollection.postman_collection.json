@@ -121,7 +121,7 @@
 					"script": {
 						"exec": [
 							"pm.test(\"Status test\", function(){",
-							"    pm.response.to.have.status(200);",
+							"    pm.response.to.have.status(404);",
 							"});"
 						],
 						"type": "text/javascript"
@@ -249,7 +249,7 @@
 					"script": {
 						"exec": [
 							"pm.test(\"Status test\", function(){",
-							"    pm.response.to.have.status(200);",
+							"    pm.response.to.have.status(404);",
 							"});"
 						],
 						"type": "text/javascript"
@@ -377,7 +377,7 @@
 					"script": {
 						"exec": [
 							"pm.test(\"Status test\", function(){",
-							"    pm.response.to.have.status(200);",
+							"    pm.response.to.have.status(404);",
 							"});"
 						],
 						"type": "text/javascript"

@@ -11,16 +11,20 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.util.List;
 
+/**
+ * GameService class
+ */
 @Path("game")
 public class GameService {
 
+    /**
+     * lists all games
+     * @return response with list of games in json format
+     */
     @GET
     @Path("list")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response listGames(
-            @QueryParam("sort") String sortField,
-            @QueryParam("order") String sortOrder
-    ) {
+    public Response listGames() {
 
         List<Game> gameMap = DataHandler.getInstance().readAllGames();
 
@@ -30,15 +34,33 @@ public class GameService {
                 .build();
     }
 
+    /**
+     * shows one game with the specified UUID
+     * @param gameUUID
+     * @return response with one game in json format
+     */
     @GET
     @Path("read")
     @Produces(MediaType.APPLICATION_JSON)
     public Response readGame(
             @QueryParam("uuid") String gameUUID
     ){
-        Game game = DataHandler.getInstance().readGameByUUID(gameUUID);
+        Game game = null;
+        int httpStatus;
+
+        try {
+            game = DataHandler.getInstance().readGameByUUID(gameUUID);
+            if (game == null){
+                httpStatus = 404;
+            } else {
+                httpStatus = 200;
+            }
+        } catch (IllegalArgumentException argEx){
+            httpStatus = 400;
+        }
+
         return Response
-                .status(200)
+                .status(httpStatus)
                 .entity(game)
                 .build();
     }
