@@ -1,0 +1,355 @@
+{
+	"id": "ffeaeaf4-ad80-4082-8877-7a810cc9bfb5",
+	"name": "Tests-GameCollection",
+	"timestamp": "2022-05-24T14:42:08.816Z",
+	"collection_id": "33f91a68-6760-4eef-9c8a-22a4d56e37ab",
+	"folder_id": 0,
+	"environment_id": "0",
+	"totalPass": 15,
+	"totalFail": 0,
+	"results": [
+		{
+			"id": "f612b372-bef0-467d-af28-23b2dcbf22d3",
+			"name": "0.1: Testservice",
+			"url": "http://localhost:8080/Game-Collection-1.0/resource/test/test",
+			"time": 113,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				113
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "9c94750c-7899-49e5-a584-4cc32f6a4d7d",
+			"name": "1.0 List all games",
+			"url": "http://localhost:8080/Game-Collection-1.0/resource/game/list",
+			"time": 1569,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status test": true,
+				"Validate response": true
+			},
+			"testPassFailCounts": {
+				"Status test": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Validate response": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				1569
+			],
+			"allTests": [
+				{
+					"Status test": true,
+					"Validate response": true
+				}
+			]
+		},
+		{
+			"id": "3b7aff7c-4f1a-49d0-9b93-63154b0d0fbd",
+			"name": "1.1 Read game",
+			"url": "http://localhost:8080/Game-Collection-1.0/resource/game/read?uuid=2cb978ea-c305-4982-a1dd-cf93bffa9baa",
+			"time": 288,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status test": true,
+				"Validate response": true
+			},
+			"testPassFailCounts": {
+				"Status test": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Validate response": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				288
+			],
+			"allTests": [
+				{
+					"Status test": true,
+					"Validate response": true
+				}
+			]
+		},
+		{
+			"id": "c6eedb91-450b-49cc-a656-ac40fcc3ca93",
+			"name": "1.2 Read game not found",
+			"url": "http://localhost:8080/Game-Collection-1.0/resource/game/read?uuid=2cb978ea-c305-4982-a1dd-cf93bffa9bac",
+			"time": 24,
+			"responseCode": {
+				"code": 404,
+				"name": "Not Found"
+			},
+			"tests": {
+				"Status test": true
+			},
+			"testPassFailCounts": {
+				"Status test": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				24
+			],
+			"allTests": [
+				{
+					"Status test": true
+				}
+			]
+		},
+		{
+			"id": "00001723-3979-4008-84d8-1954aa49f028",
+			"name": "1.3 List all franchises",
+			"url": "http://localhost:8080/Game-Collection-1.0/resource/franchise/list",
+			"time": 37,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status test": true,
+				"Validate response": true
+			},
+			"testPassFailCounts": {
+				"Status test": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Validate response": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				37
+			],
+			"allTests": [
+				{
+					"Status test": true,
+					"Validate response": true
+				}
+			]
+		},
+		{
+			"id": "b69328f7-7fac-4e40-9644-21d34e6624d0",
+			"name": "1.4 Read franchise",
+			"url": "http://localhost:8080/Game-Collection-1.0/resource/franchise/read?uuid=7954ee76-cceb-4f3d-887c-7b933351712d",
+			"time": 77,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status test": true,
+				"Validate response": true
+			},
+			"testPassFailCounts": {
+				"Status test": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Validate response": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				77
+			],
+			"allTests": [
+				{
+					"Status test": true,
+					"Validate response": true
+				}
+			]
+		},
+		{
+			"id": "a0cf619e-3c07-4885-88cb-933324d31695",
+			"name": "1.5 Read franchise not found",
+			"url": "http://localhost:8080/Game-Collection-1.0/resource/franchise/read?uuid=7954ee76-cceb-4f3d-887c-7b933351712e",
+			"time": 75,
+			"responseCode": {
+				"code": 404,
+				"name": "Not Found"
+			},
+			"tests": {
+				"Status test": true
+			},
+			"testPassFailCounts": {
+				"Status test": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				75
+			],
+			"allTests": [
+				{
+					"Status test": true
+				}
+			]
+		},
+		{
+			"id": "629fe8c5-fbbe-41d1-8650-3ff3225fcd7a",
+			"name": "1.6 List all studios",
+			"url": "http://localhost:8080/Game-Collection-1.0/resource/studio/list",
+			"time": 27,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status test": true,
+				"Validate response": true
+			},
+			"testPassFailCounts": {
+				"Status test": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Validate response": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				27
+			],
+			"allTests": [
+				{
+					"Status test": true,
+					"Validate response": true
+				}
+			]
+		},
+		{
+			"id": "f8d4480e-fc3a-42fd-b782-2b5d583c7636",
+			"name": "1.7 Read studio",
+			"url": "http://localhost:8080/Game-Collection-1.0/resource/studio/read?uuid=e6e6e0b2-785c-4736-b682-b6f9dc0377a5",
+			"time": 30,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status test": true,
+				"Validate response": true
+			},
+			"testPassFailCounts": {
+				"Status test": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Validate response": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				30
+			],
+			"allTests": [
+				{
+					"Status test": true,
+					"Validate response": true
+				}
+			]
+		},
+		{
+			"id": "d5355562-f620-442d-9724-b60dd758763f",
+			"name": "1.8 Read studio not found",
+			"url": "http://localhost:8080/Game-Collection-1.0/resource/studio/read?uuid=e6e6e0b2-785c-4736-b682-b6f9dc0377a6",
+			"time": 22,
+			"responseCode": {
+				"code": 404,
+				"name": "Not Found"
+			},
+			"tests": {
+				"Status test": true
+			},
+			"testPassFailCounts": {
+				"Status test": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				22
+			],
+			"allTests": [
+				{
+					"Status test": true
+				}
+			]
+		}
+	],
+	"count": 1,
+	"totalTime": 2262,
+	"collection": {
+		"requests": [
+			{
+				"id": "f612b372-bef0-467d-af28-23b2dcbf22d3",
+				"method": "GET"
+			},
+			{
+				"id": "9c94750c-7899-49e5-a584-4cc32f6a4d7d",
+				"method": "GET"
+			},
+			{
+				"id": "3b7aff7c-4f1a-49d0-9b93-63154b0d0fbd",
+				"method": "GET"
+			},
+			{
+				"id": "c6eedb91-450b-49cc-a656-ac40fcc3ca93",
+				"method": "GET"
+			},
+			{
+				"id": "00001723-3979-4008-84d8-1954aa49f028",
+				"method": "GET"
+			},
+			{
+				"id": "b69328f7-7fac-4e40-9644-21d34e6624d0",
+				"method": "GET"
+			},
+			{
+				"id": "a0cf619e-3c07-4885-88cb-933324d31695",
+				"method": "GET"
+			},
+			{
+				"id": "629fe8c5-fbbe-41d1-8650-3ff3225fcd7a",
+				"method": "GET"
+			},
+			{
+				"id": "f8d4480e-fc3a-42fd-b782-2b5d583c7636",
+				"method": "GET"
+			},
+			{
+				"id": "d5355562-f620-442d-9724-b60dd758763f",
+				"method": "GET"
+			}
+		]
+	}
+}
