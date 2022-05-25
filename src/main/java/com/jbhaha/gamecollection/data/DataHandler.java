@@ -1,12 +1,15 @@
 package com.jbhaha.gamecollection.data;
 
+import com.fasterxml.jackson.core.util.DefaultPrettyPrinter;
+import com.fasterxml.jackson.databind.ObjectWriter;
 import com.jbhaha.gamecollection.model.Game;
 import com.jbhaha.gamecollection.model.Franchise;
 import com.jbhaha.gamecollection.model.Studio;
 import com.jbhaha.gamecollection.service.Config;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import java.io.IOException;
+import java.io.*;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
@@ -15,11 +18,11 @@ import java.util.List;
 /**
  * reads and writes the data in the JSON-files
  */
-public class DataHandler {
-    private static DataHandler instance = null;
-    private List<Game> gameList;
-    private List<Franchise> franchiseList;
-    private List<Studio> studioList;
+public final class DataHandler {
+    private static DataHandler instance;
+    private static List<Game> gameList;
+    private static List<Franchise> franchiseList;
+    private static List<Studio> studioList;
 
     /**
      * private constructor defeats instantiation
@@ -34,23 +37,11 @@ public class DataHandler {
     }
 
     /**
-     * gets the only instance of this class
-     *
-     * @return
-     */
-    public static DataHandler getInstance() {
-        if (instance == null)
-            instance = new DataHandler();
-        return instance;
-    }
-
-
-    /**
      * reads all games
      *
      * @return list of games
      */
-    public List<Game> readAllGames() {
+    public static List<Game> readAllGames() {
         return getGameList();
     }
 
@@ -60,7 +51,7 @@ public class DataHandler {
      * @param gameUUID
      * @return the game (null=not found)
      */
-    public Game readGameByUUID(String gameUUID) {
+    public static Game readGameByUUID(String gameUUID) {
         Game game = null;
         for (Game entry : getGameList()) {
             if (entry.getGameUUID().equals(gameUUID)) {
@@ -71,11 +62,44 @@ public class DataHandler {
     }
 
     /**
+     * inserts a new game into the gameList
+     *
+     * @param game the game to be saved
+     */
+    public static void insertGame(Game game) {
+        getGameList().add(game);
+        writeGameJSON();
+    }
+
+    /**
+     * updates the gameList
+     */
+    public static void updateGame() {
+        writeGameJSON();
+    }
+
+    /**
+     * deletes a game identified by the gameUUID
+     * @param gameUUID  the key
+     * @return  success=true/false
+     */
+    public static boolean deleteGame(String gameUUID) {
+        Game game = readGameByUUID(gameUUID);
+        if (game != null) {
+            getGameList().remove(game);
+            writeGameJSON();
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    /**
      * reads all franchises
      *
      * @return list of franchises
      */
-    public List<Franchise> readAllFranchises() {
+    public static List<Franchise> readAllFranchises() {
 
         return getFranchiseList();
     }
@@ -86,7 +110,7 @@ public class DataHandler {
      * @param franchiseUUID
      * @return the franchise (null=not found)
      */
-    public Franchise readFranchiseByUUID(String franchiseUUID) {
+    public static Franchise readFranchiseByUUID(String franchiseUUID) {
         Franchise franchise = null;
         for (Franchise entry : getFranchiseList()) {
             if (entry.getFranchiseUUID().equals(franchiseUUID)) {
@@ -97,11 +121,44 @@ public class DataHandler {
     }
 
     /**
+     * inserts a new franchise into the franchiseList
+     *
+     * @param franchise the franchise to be saved
+     */
+    public static void insertFranchise(Franchise franchise) {
+        getFranchiseList().add(franchise);
+        writeFranchisesJSON();
+    }
+
+    /**
+     * updates the franchiseList
+     */
+    public static void updateFranchise() {
+        writeFranchisesJSON();
+    }
+
+    /**
+     * deletes a franchise identified by the franchiseUUID
+     * @param franchiseUUID  the key
+     * @return  success=true/false
+     */
+    public static boolean deleteFranchise(String franchiseUUID) {
+        Franchise franchise = readFranchiseByUUID(franchiseUUID);
+        if (franchise != null) {
+            getFranchiseList().remove(franchise);
+            writeFranchisesJSON();
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    /**
      * reads all studios
      *
      * @return list of studios
      */
-    public List<Studio> readAllStudios() {
+    public static List<Studio> readAllStudios() {
         return getStudioList();
     }
 
@@ -111,7 +168,7 @@ public class DataHandler {
      * @param studioUUID
      * @return the studio (null=not found)
      */
-    public Studio readStudioByUUID(String studioUUID) {
+    public static Studio readStudioByUUID(String studioUUID) {
         Studio studio = null;
         for (Studio entry : getStudioList()) {
             if (entry.getStudioUUID().equals(studioUUID)) {
@@ -122,9 +179,42 @@ public class DataHandler {
     }
 
     /**
+     * inserts a new studio into the studioList
+     *
+     * @param studio the studio to be saved
+     */
+    public static void insertStudio(Studio studio) {
+        getStudioList().add(studio);
+        writeStudioJSON();
+    }
+
+    /**
+     * updates the studioList
+     */
+    public static void updateStudio() {
+        writeStudioJSON();
+    }
+
+    /**
+     * deletes a studio identified by the studioUUID
+     * @param studioUUID  the key
+     * @return  success=true/false
+     */
+    public static boolean deleteStudio(String studioUUID) {
+        Studio studio = readStudioByUUID(studioUUID);
+        if (studio != null) {
+            getStudioList().remove(studio);
+            writeStudioJSON();
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    /**
      * reads the games from the JSON-file
      */
-    private void readGamesJSON() {
+    private static void readGamesJSON() {
         try {
             String path = Config.getProperty("gamesJSON");
             byte[] jsonData = Files.readAllBytes(
@@ -141,9 +231,28 @@ public class DataHandler {
     }
 
     /**
+     * writes the gameList to the JSON-file
+     */
+    private static void writeGameJSON() {
+        ObjectMapper objectMapper = new ObjectMapper();
+        ObjectWriter objectWriter = objectMapper.writer(new DefaultPrettyPrinter());
+        FileOutputStream fileOutputStream = null;
+        Writer fileWriter;
+
+        String gamePath = Config.getProperty("gameJSON");
+        try {
+            fileOutputStream = new FileOutputStream(gamePath);
+            fileWriter = new BufferedWriter(new OutputStreamWriter(fileOutputStream, StandardCharsets.UTF_8));
+            objectWriter.writeValue(fileWriter, getGameList());
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    /**
      * reads the franchises from the JSON-file
      */
-    private void readFranchisesJSON() {
+    private static void readFranchisesJSON() {
         try {
             byte[] jsonData = Files.readAllBytes(
                     Paths.get(
@@ -161,9 +270,28 @@ public class DataHandler {
     }
 
     /**
+     * writes the franchiseList to the JSON-file
+     */
+    private static void writeFranchisesJSON() {
+        ObjectMapper objectMapper = new ObjectMapper();
+        ObjectWriter objectWriter = objectMapper.writer(new DefaultPrettyPrinter());
+        FileOutputStream fileOutputStream = null;
+        Writer fileWriter;
+
+        String franchisePath = Config.getProperty("franchiseJSON");
+        try {
+            fileOutputStream = new FileOutputStream(franchisePath);
+            fileWriter = new BufferedWriter(new OutputStreamWriter(fileOutputStream, StandardCharsets.UTF_8));
+            objectWriter.writeValue(fileWriter, getFranchiseList());
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    /**
      * reads the studios from the JSON-file
      */
-    private void readStudiosJSON() {
+    private static void readStudiosJSON() {
         try {
             String path = Config.getProperty("studiosJSON");
             byte[] jsonData = Files.readAllBytes(
@@ -180,11 +308,34 @@ public class DataHandler {
     }
 
     /**
+     * writes the studioList to the JSON-file
+     */
+    private static void writeStudioJSON() {
+        ObjectMapper objectMapper = new ObjectMapper();
+        ObjectWriter objectWriter = objectMapper.writer(new DefaultPrettyPrinter());
+        FileOutputStream fileOutputStream = null;
+        Writer fileWriter;
+
+        String studioPath = Config.getProperty("studioJSON");
+        try {
+            fileOutputStream = new FileOutputStream(studioPath);
+            fileWriter = new BufferedWriter(new OutputStreamWriter(fileOutputStream, StandardCharsets.UTF_8));
+            objectWriter.writeValue(fileWriter, getStudioList());
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    /**
      * gets gameList
      *
      * @return value of gameList
      */
-    private List<Game> getGameList() {
+    private static List<Game> getGameList() {
+        if (gameList == null) {
+            setGameList(new ArrayList<>());
+            readGamesJSON();
+        }
         return gameList;
     }
 
@@ -193,8 +344,8 @@ public class DataHandler {
      *
      * @param gameList the value to set
      */
-    private void setGameList(List<Game> gameList) {
-        this.gameList = gameList;
+    private static void setGameList(List<Game> gameList) {
+        DataHandler.gameList = gameList;
     }
 
     /**
@@ -202,7 +353,11 @@ public class DataHandler {
      *
      * @return value of franchiseList
      */
-    private List<Franchise> getFranchiseList() {
+    private static List<Franchise> getFranchiseList() {
+        if (franchiseList == null) {
+            setFranchiseList(new ArrayList<>());
+            readFranchisesJSON();
+        }
         return franchiseList;
     }
 
@@ -211,15 +366,19 @@ public class DataHandler {
      *
      * @param franchiseList the value to set
      */
-    private void setFranchiseList(List<Franchise> franchiseList) {
-        this.franchiseList = franchiseList;
+    private static void setFranchiseList(List<Franchise> franchiseList) {
+        DataHandler.franchiseList = franchiseList;
     }
 
-    public List<Studio> getStudioList() {
+    public static List<Studio> getStudioList() {
+        if (studioList == null) {
+            setStudioList(new ArrayList<>());
+            readStudiosJSON();
+        }
         return studioList;
     }
 
-    public void setStudioList(List<Studio> studioList) {
-        this.studioList = studioList;
+    public static void setStudioList(List<Studio> studioList) {
+        DataHandler.studioList = studioList;
     }
 }

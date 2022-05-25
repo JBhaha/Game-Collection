@@ -27,7 +27,7 @@ public class StudioService {
     @Produces(MediaType.APPLICATION_JSON)
     public Response listStudios() {
 
-        List<Studio> studioMap = DataHandler.getInstance().readAllStudios();
+        List<Studio> studioMap = DataHandler.readAllStudios();
 
         return Response
                 .status(200)
@@ -50,7 +50,7 @@ public class StudioService {
         int httpStatus;
 
         try {
-            studio = DataHandler.getInstance().readStudioByUUID(studioUUID);
+            studio = DataHandler.readStudioByUUID(studioUUID);
             if (studio == null){
                 httpStatus = 404;
             } else {

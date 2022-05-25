@@ -26,7 +26,7 @@ public class FranchiseService {
     @Produces(MediaType.APPLICATION_JSON)
     public Response listFranchises() {
 
-        List<Franchise> franchiseMap = DataHandler.getInstance().readAllFranchises();
+        List<Franchise> franchiseMap = DataHandler.readAllFranchises();
 
         return Response
                 .status(200)
@@ -49,7 +49,7 @@ public class FranchiseService {
         int httpStatus;
 
         try {
-            franchise = DataHandler.getInstance().readFranchiseByUUID(franchiseUUID);
+            franchise = DataHandler.readFranchiseByUUID(franchiseUUID);
             if (franchise == null){
                 httpStatus = 404;
             } else {
