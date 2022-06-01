@@ -1,5 +1,12 @@
 package com.jbhaha.gamecollection.model;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.jbhaha.gamecollection.util.LocalDateDeserializer;
+import com.jbhaha.gamecollection.util.LocalDateSerializer;
+
+import javax.validation.constraints.Pattern;
+import javax.ws.rs.FormParam;
 import java.time.LocalDate;
 import java.util.LinkedHashMap;
 
@@ -8,8 +15,13 @@ import java.util.LinkedHashMap;
  */
 public class Studio {
 
+    @FormParam("bookUUID")
+    @Pattern(regexp = "|[0-9a-fA-F]{8}-([0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}")
     private String studioUUID;
     private String studio;
+
+    @JsonDeserialize(using = LocalDateDeserializer.class)
+    @JsonSerialize(using = LocalDateSerializer.class)
     private LocalDate founded;
     private String location;
 

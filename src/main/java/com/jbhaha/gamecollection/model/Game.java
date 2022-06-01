@@ -1,15 +1,26 @@
 package com.jbhaha.gamecollection.model;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.jbhaha.gamecollection.util.LocalDateDeserializer;
+import com.jbhaha.gamecollection.util.LocalDateSerializer;
+
+import javax.validation.constraints.Pattern;
+import javax.ws.rs.FormParam;
 import java.time.LocalDate;
-import java.util.LinkedHashMap;
 
 /**
  * Game model class
  */
 public class Game {
 
+    @FormParam("bookUUID")
+    @Pattern(regexp = "|[0-9a-fA-F]{8}-([0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}")
     private String gameUUID;
     private String title;
+
+    @JsonDeserialize(using = LocalDateDeserializer.class)
+    @JsonSerialize(using = LocalDateSerializer.class)
     private LocalDate release;
 
     /**
@@ -56,7 +67,7 @@ public class Game {
      * Release setter
      * @param release
      */
-    public void setRelease(LinkedHashMap<String, Integer> release) {
-        this.release = LocalDate.of(release.get("year"), release.get("month"), release.get("day"));
+    public void setRelease(LocalDate release) {
+        this.release = release;
     }
 }

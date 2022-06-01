@@ -3,9 +3,12 @@ package com.jbhaha.gamecollection.service;
 import com.jbhaha.gamecollection.data.DataHandler;
 import com.jbhaha.gamecollection.model.Game;
 
+import javax.validation.Valid;
+import javax.validation.constraints.Pattern;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.UUID;
 
@@ -41,6 +44,7 @@ public class GameService {
     @Path("read")
     @Produces(MediaType.APPLICATION_JSON)
     public Response readGame(
+            @Pattern(regexp = "[0-9a-fA-F]{8}-([0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}")
             @QueryParam("uuid") String gameUUID
     ){
         Game game = null;
@@ -67,6 +71,7 @@ public class GameService {
     @Path("delete")
     @Produces(MediaType.TEXT_PLAIN)
     public Response deleteGame(
+            @Pattern(regexp = "[0-9a-fA-F]{8}-([0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}")
             @QueryParam("uuid") String gameUUID
     ){
         int httpStatus = 200;
@@ -83,15 +88,10 @@ public class GameService {
     @Path("create")
     @Produces(MediaType.TEXT_PLAIN)
     public Response insertBook(
-            @FormParam("title") String title,
-            @FormParam("release") String release
+            @Valid @BeanParam Game newGame
     ){
-        Game game = new Game();
-        game.setGameUUID(UUID.randomUUID().toString());
-        game.setTitle(title);
-        game.setRelease(release);
-
-        DataHandler.insertGame(game);
+        newGame.setGameUUID(UUID.randomUUID().toString());
+        DataHandler.insertGame(newGame);
         return Response
                 .status(200)
                 .entity("")
@@ -102,15 +102,13 @@ public class GameService {
     @Path("update")
     @Produces(MediaType.TEXT_PLAIN)
     public Response updateGame(
-            @FormParam("gameUUID") String gameUUID,
-            @FormParam("title") String title,
-            @FormParam("release") String release
+            @Valid @BeanParam Game changedGame
     ){
         int httpStatus = 200;
-        Game game = DataHandler.readGameByUUID(gameUUID);
+        Game game = DataHandler.readGameByUUID(changedGame.getGameUUID());
         if (game != null){
-            game.setTitle(title);
-            game.setRelease(release);
+            game.setTitle(changedGame.getTitle());
+            game.setRelease(LocalDate.parse(changedGame.getRelease().toString()));
 
 
             DataHandler.updateGame();
