@@ -28,12 +28,15 @@ public final class DataHandler {
      * private constructor defeats instantiation
      */
     private DataHandler() {
-        setGameList(new ArrayList<>());
-        readGamesJSON();
-        setFranchiseList(new ArrayList<>());
-        readFranchisesJSON();
-        setStudioList(new ArrayList<>());
-        readStudiosJSON();
+    }
+
+    /**
+     * initialize the lists with the data
+     */
+    public static void initLists() {
+        DataHandler.setGameList(null);
+        DataHandler.setFranchiseList(null);
+        DataHandler.setStudioList(null);
     }
 
     /**
