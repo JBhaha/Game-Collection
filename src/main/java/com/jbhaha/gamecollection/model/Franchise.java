@@ -1,7 +1,11 @@
 package com.jbhaha.gamecollection.model;
 
-import javax.validation.constraints.Pattern;
+import com.jbhaha.gamecollection.data.DataHandler;
+
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
 import javax.ws.rs.FormParam;
+import java.util.ListIterator;
 import java.util.Vector;
 
 /**
@@ -9,13 +13,29 @@ import java.util.Vector;
  */
 public class Franchise {
 
-    @FormParam("bookUUID")
-    @Pattern(regexp = "|[0-9a-fA-F]{8}-([0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}")
     private String franchiseUUID;
+
+    @FormParam("franchise")
+    @NotEmpty
+    @Size(min=1, max=40)
     private String franchise;
+
+    @FormParam("genre")
+    @NotEmpty
+    @Size(min=1, max=40)
     private String genre;
+
+    @FormParam("games")
+    @NotEmpty
+    @Size(min=1, max=20)
     private Integer games;
+
+    @FormParam("studio")
+    @NotEmpty
     private Studio studio;
+
+    @FormParam("gameList")
+    @NotEmpty
     private Vector<Game> gameList;
 
     /**
@@ -83,7 +103,7 @@ public class Franchise {
     }
 
     /**
-     * Gamelist getter
+     * gameList getter
      * @return gameList
      */
     public Vector<Game> getGameList() {
@@ -91,11 +111,22 @@ public class Franchise {
     }
 
     /**
-     * Gamelist setter
+     * gameList setter
      * @param gameList
      */
     public void setGameList(Vector<Game> gameList) {
         this.gameList = gameList;
+    }
+
+    /**
+     * gameList setter (using UUIDs)
+     * @param gameUUIDs
+     */
+    public void setGameListUsingUUIDs(Vector<String> gameUUIDs) {
+        ListIterator<String> iterator = gameUUIDs.listIterator();
+        while (iterator.hasNext()){
+            gameList.add(DataHandler.readGameByUUID(iterator.next()));
+        }
     }
 
     /**
@@ -113,4 +144,14 @@ public class Franchise {
     public void setStudio(Studio studio) {
         this.studio = studio;
     }
+
+    /**
+     * Studio setter (using UUID)
+     * @param studioUUID
+     */
+    public void setStudioUsingUUID(String studioUUID) {
+        this.studio = DataHandler.readStudioByUUID(studioUUID);
+    }
+
+
 }

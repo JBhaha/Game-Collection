@@ -2,41 +2,25 @@
     {
         "studioUUID": "c3f8b9d8-c436-4b28-b38d-482ad8240f32",
             "studio": "Mojang Studios",
-            "founded": {
-                "year": 2009,
-                "month": 5,
-                "day": 17
-            },
+            "founded": "2009-05-17",
             "location": "Stockholm, Sweden, GMT +1"
     },
     {
         "studioUUID": "b0aa7901-e783-41bc-b963-496de2a8ce2b",
             "studio": "CD Project RED",
-            "founded": {
-                "year": 2002,
-                "month": 1,
-                "day": 1
-            },
+            "founded": "2002-01-01",
             "location": "Warsaw, Poland, GMT +1"
     },
     {
         "studioUUID": "fe493c72-8b32-4201-a6d7-5c80628b5442",
             "studio": "Ubisoft Montreal",
-            "founded": {
-                "year": 1997,
-                "month": 1,
-                "day": 1
-            },
+            "founded": "1997-01-01",
             "location": "Montreal, Canada, GMT -5"
     },
     {
         "studioUUID": "e6e6e0b2-785c-4736-b682-b6f9dc0377a5",
             "studio": "Xbox Game Studios",
-            "founded": {
-                "year": 2000,
-                "month": 3,
-                "day": 1
-            },
+            "founded": "2000-03-01",
             "location": "Washington DC, USA, GMT -5"
     }
 ]

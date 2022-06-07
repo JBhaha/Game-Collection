@@ -4,6 +4,7 @@ import com.jbhaha.gamecollection.data.DataHandler;
 import com.jbhaha.gamecollection.model.Game;
 
 import javax.validation.Valid;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Pattern;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
@@ -44,6 +45,7 @@ public class GameService {
     @Path("read")
     @Produces(MediaType.APPLICATION_JSON)
     public Response readGame(
+            @NotEmpty
             @Pattern(regexp = "[0-9a-fA-F]{8}-([0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}")
             @QueryParam("uuid") String gameUUID
     ){
@@ -71,6 +73,7 @@ public class GameService {
     @Path("delete")
     @Produces(MediaType.TEXT_PLAIN)
     public Response deleteGame(
+            @NotEmpty
             @Pattern(regexp = "[0-9a-fA-F]{8}-([0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}")
             @QueryParam("uuid") String gameUUID
     ){

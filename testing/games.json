@@ -2,37 +2,21 @@
     {
         "gameUUID": "2cb978ea-c305-4982-a1dd-cf93bffa9baa",
         "title": "Minecraft: Java Edition",
-        "release": {
-            "year": 2011,
-            "month": 11,
-            "day": 18
-        }
+        "release": "2011-11-18"
     },
     {
         "gameUUID": "5dcfedb9-a3e8-4a8e-8365-59c44be8259a",
         "title": "Cyberpunk 2077",
-        "release": {
-            "year": 2020,
-            "month": 12,
-            "day": 10
-        }
+        "release": "2020-12-10"
     },
     {
         "gameUUID": "8a7eaf0c-2e00-4b5c-ad86-0e374fb1db01",
         "title": "Tom Clancy's Rainbow Six Siege",
-        "release": {
-            "year": 2015,
-            "month": 12,
-            "day": 1
-        }
+        "release": "2015-12-01"
     },
     {
         "gameUUID": "76a40135-d6d7-472f-8d75-d80db027dcbd",
         "title": "Microsoft Flight Simulator",
-        "release": {
-            "year": 2020,
-            "month": 8,
-            "day": 18
-        }
+        "release": "2020-08-18"
     }
 ]

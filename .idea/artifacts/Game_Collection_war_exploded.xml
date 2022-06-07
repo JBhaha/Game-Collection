@@ -17,7 +17,7 @@
           <element id="library" level="project" name="Maven: com.fasterxml.jackson.core:jackson-databind:2.13.2" />
           <element id="library" level="project" name="Maven: com.fasterxml.jackson.core:jackson-annotations:2.13.2" />
           <element id="library" level="project" name="Maven: com.fasterxml.jackson.core:jackson-core:2.13.2" />
-          <element id="library" level="project" name="Maven: javax.validation:validation-api:1.1.0.Final" />
+          <element id="library" level="project" name="Maven: jakarta.validation:jakarta.validation-api:2.0.2" />
         </element>
       </element>
       <element id="directory" name="META-INF">

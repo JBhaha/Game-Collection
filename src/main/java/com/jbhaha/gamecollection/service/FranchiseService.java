@@ -3,13 +3,14 @@ package com.jbhaha.gamecollection.service;
 import com.jbhaha.gamecollection.data.DataHandler;
 import com.jbhaha.gamecollection.model.Franchise;
 
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
-import javax.ws.rs.QueryParam;
+import javax.validation.Valid;
+import javax.validation.constraints.Pattern;
+import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import java.time.LocalDate;
 import java.util.List;
+import java.util.UUID;
 
 /**
  * FranchiseService class
@@ -62,6 +63,62 @@ public class FranchiseService {
         return Response
                 .status(httpStatus)
                 .entity(franchise)
+                .build();
+    }
+
+    @DELETE
+    @Path("delete")
+    @Produces(MediaType.TEXT_PLAIN)
+    public Response deleteFranchise(
+            @Pattern(regexp = "[0-9a-fA-F]{8}-([0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}")
+            @QueryParam("uuid") String franchiseUUID
+    ){
+        int httpStatus = 200;
+        if (!DataHandler.deleteFranchise(franchiseUUID)){
+            httpStatus = 410;
+        }
+        return Response
+                .status(httpStatus)
+                .entity("")
+                .build();
+    }
+
+    @POST
+    @Path("create")
+    @Produces(MediaType.TEXT_PLAIN)
+    public Response insertFranchise(
+            @Valid @BeanParam Franchise newFranchise
+    ){
+        newFranchise.setFranchiseUUID(UUID.randomUUID().toString());
+        DataHandler.insertFranchise(newFranchise);
+        return Response
+                .status(200)
+                .entity("")
+                .build();
+    }
+
+    @PUT
+    @Path("update")
+    @Produces(MediaType.TEXT_PLAIN)
+    public Response updateFranchise(
+            @Valid @BeanParam Franchise changedFranchise
+    ){
+        int httpStatus = 200;
+        Franchise franchise = DataHandler.readFranchiseByUUID(changedFranchise.getFranchiseUUID());
+        if (franchise != null){
+            franchise.setFranchise(changedFranchise.getFranchise());
+            franchise.setGenre(changedFranchise.getGenre());
+            franchise.setGames(changedFranchise.getGames());
+            franchise.setStudio(changedFranchise.getStudio());
+            franchise.setGameList(changedFranchise.getGameList());
+
+            DataHandler.updateFranchise();
+        } else{
+            httpStatus = 410;
+        }
+        return Response
+                .status(httpStatus)
+                .entity("")
                 .build();
     }
 

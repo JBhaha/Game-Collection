@@ -5,7 +5,9 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.jbhaha.gamecollection.util.LocalDateDeserializer;
 import com.jbhaha.gamecollection.util.LocalDateSerializer;
 
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 import javax.ws.rs.FormParam;
 import java.time.LocalDate;
 import java.util.LinkedHashMap;
@@ -15,14 +17,21 @@ import java.util.LinkedHashMap;
  */
 public class Studio {
 
-    @FormParam("bookUUID")
-    @Pattern(regexp = "|[0-9a-fA-F]{8}-([0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}")
     private String studioUUID;
+
+    @FormParam("studio")
+    @NotEmpty
+    @Size(min=1, max=40)
     private String studio;
 
     @JsonDeserialize(using = LocalDateDeserializer.class)
     @JsonSerialize(using = LocalDateSerializer.class)
+    @NotEmpty
     private LocalDate founded;
+
+    @FormParam("location")
+    @NotEmpty
+    @Pattern(regexp = "")
     private String location;
 
     /**
@@ -69,8 +78,8 @@ public class Studio {
      * Founded setter
      * @param founded
      */
-    public void setFounded(LinkedHashMap<String, Integer> founded) {
-        this.founded = LocalDate.of(founded.get("year"), founded.get("month"), founded.get("day"));
+    public void setFounded(LocalDate founded) {
+        this.founded = founded;
     }
 
     /**
