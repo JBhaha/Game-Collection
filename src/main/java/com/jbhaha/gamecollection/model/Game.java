@@ -23,9 +23,9 @@ public class Game {
     @Size(min=1, max=40)
     private String title;
 
+    @FormParam("release")
     @JsonDeserialize(using = LocalDateDeserializer.class)
     @JsonSerialize(using = LocalDateSerializer.class)
-    @NotEmpty
     private LocalDate release;
 
     /**

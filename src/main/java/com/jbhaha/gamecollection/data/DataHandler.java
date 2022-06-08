@@ -242,7 +242,7 @@ public final class DataHandler {
         FileOutputStream fileOutputStream = null;
         Writer fileWriter;
 
-        String gamePath = Config.getProperty("gameJSON");
+        String gamePath = Config.getProperty("gamesJSON");
         try {
             fileOutputStream = new FileOutputStream(gamePath);
             fileWriter = new BufferedWriter(new OutputStreamWriter(fileOutputStream, StandardCharsets.UTF_8));
