@@ -1,5 +1,6 @@
 package com.jbhaha.gamecollection.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.jbhaha.gamecollection.data.DataHandler;
 
 import javax.validation.constraints.NotEmpty;
@@ -30,13 +31,22 @@ public class Franchise {
     @Size(min=1, max=20)
     private Integer games;
 
-    @FormParam("studio")
-    @NotEmpty
+    @JsonIgnore
     private Studio studio;
 
     @FormParam("gameList")
-    @NotEmpty
+    @JsonIgnore
     private Vector<Game> gameList;
+
+
+    public void setStudioUUID(String studioUUID){
+        setStudio(new Studio());
+        Studio studio = DataHandler.readStudioByUUID(studioUUID);
+        getStudio().setStudioUUID(studioUUID);
+        getStudio().setStudio(studio.getStudio());
+        getStudio().setFounded(studio.getFounded());
+        getStudio().setLocation(studio.getLocation());
+    }
 
     /**
      * FranchiseUUID getter
@@ -143,14 +153,6 @@ public class Franchise {
      */
     public void setStudio(Studio studio) {
         this.studio = studio;
-    }
-
-    /**
-     * Studio setter (using UUID)
-     * @param studioUUID
-     */
-    public void setStudioUsingUUID(String studioUUID) {
-        this.studio = DataHandler.readStudioByUUID(studioUUID);
     }
 
 

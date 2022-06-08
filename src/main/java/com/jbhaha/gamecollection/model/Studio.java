@@ -24,14 +24,14 @@ public class Studio {
     @Size(min=1, max=40)
     private String studio;
 
+    @FormParam("founded")
     @JsonDeserialize(using = LocalDateDeserializer.class)
     @JsonSerialize(using = LocalDateSerializer.class)
-    @NotEmpty
     private LocalDate founded;
 
     @FormParam("location")
     @NotEmpty
-    @Pattern(regexp = "")
+    @Pattern(regexp = "[a-zA-Z]+, [a-zA-Z]+, [a-zA-Z]+([+-]?(?=\\.\\d|\\d)(?:\\d+)?(?:\\.?\\d*))(?:[eE]([+-]?\\d+))?")
     private String location;
 
     /**

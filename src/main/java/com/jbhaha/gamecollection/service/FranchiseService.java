@@ -87,9 +87,11 @@ public class FranchiseService {
     @Path("create")
     @Produces(MediaType.TEXT_PLAIN)
     public Response insertFranchise(
-            @Valid @BeanParam Franchise newFranchise
+            @Valid @BeanParam Franchise newFranchise,
+            @FormParam("studioUUID") String studioUUID
     ){
         newFranchise.setFranchiseUUID(UUID.randomUUID().toString());
+        newFranchise.setStudioUUID(studioUUID);
         DataHandler.insertFranchise(newFranchise);
         return Response
                 .status(200)

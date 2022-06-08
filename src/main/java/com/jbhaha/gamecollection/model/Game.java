@@ -6,7 +6,6 @@ import com.jbhaha.gamecollection.util.LocalDateDeserializer;
 import com.jbhaha.gamecollection.util.LocalDateSerializer;
 
 import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 import javax.ws.rs.FormParam;
 import java.time.LocalDate;
@@ -23,7 +22,6 @@ public class Game {
     @Size(min=1, max=40)
     private String title;
 
-    @FormParam("release")
     @JsonDeserialize(using = LocalDateDeserializer.class)
     @JsonSerialize(using = LocalDateSerializer.class)
     private LocalDate release;
@@ -74,5 +72,9 @@ public class Game {
      */
     public void setRelease(LocalDate release) {
         this.release = release;
+    }
+
+    public void setReleaseWithString(String release){
+        this.release = LocalDate.parse(release);
     }
 }

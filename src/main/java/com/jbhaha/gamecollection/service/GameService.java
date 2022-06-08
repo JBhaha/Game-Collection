@@ -91,9 +91,11 @@ public class GameService {
     @Path("create")
     @Produces(MediaType.TEXT_PLAIN)
     public Response insertBook(
-            @Valid @BeanParam Game newGame
+            @Valid @BeanParam Game newGame,
+            @FormParam("release") String release
     ){
         newGame.setGameUUID(UUID.randomUUID().toString());
+        newGame.setReleaseWithString(release);
         DataHandler.insertGame(newGame);
         return Response
                 .status(200)
