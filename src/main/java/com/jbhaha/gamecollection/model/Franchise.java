@@ -2,6 +2,7 @@ package com.jbhaha.gamecollection.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.jbhaha.gamecollection.data.DataHandler;
+import org.hibernate.validator.constraints.Range;
 
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
@@ -14,6 +15,7 @@ import java.util.Vector;
  */
 public class Franchise {
 
+    @FormParam("franchiseUUID")
     private String franchiseUUID;
 
     @FormParam("franchise")
@@ -27,15 +29,14 @@ public class Franchise {
     private String genre;
 
     @FormParam("games")
-    @NotEmpty
-    @Size(min=1, max=20)
+    @Range(min=1, max=20)
     private Integer games;
 
     @JsonIgnore
     private Studio studio;
 
     @FormParam("gameList")
-    @JsonIgnore
+    //@JsonIgnore
     private Vector<Game> gameList;
 
 
@@ -132,12 +133,28 @@ public class Franchise {
      * gameList setter (using UUIDs)
      * @param gameUUIDs
      */
-    public void setGameListUsingUUIDs(Vector<String> gameUUIDs) {
+    /*public void setGameListUsingUUIDs(Vector<String> gameUUIDs) {
         ListIterator<String> iterator = gameUUIDs.listIterator();
         while (iterator.hasNext()){
             gameList.add(DataHandler.readGameByUUID(iterator.next()));
         }
     }
+
+    public Vector<String> getGameUUIDList(){
+        Vector<String> gameUUIDList = new Vector<>();
+        ListIterator<Game> iterator = gameList.listIterator();
+        while (iterator.hasNext()){
+            String gameUUID = iterator.next().getGameUUID();
+            gameUUIDList.add(gameUUID);
+        }
+        return gameUUIDList;
+    }
+
+    public void setGameUUIDListWithList(Vector<String> gameUUIDList){
+        Vector<String> arrayList = new Vector<>();
+        arrayList.addAll(gameUUIDList);
+        setGameListUsingUUIDs(arrayList);
+    }*/
 
     /**
      * Studio getter

@@ -281,7 +281,7 @@ public final class DataHandler {
         FileOutputStream fileOutputStream = null;
         Writer fileWriter;
 
-        String franchisePath = Config.getProperty("franchiseJSON");
+        String franchisePath = Config.getProperty("franchisesJSON");
         try {
             fileOutputStream = new FileOutputStream(franchisePath);
             fileWriter = new BufferedWriter(new OutputStreamWriter(fileOutputStream, StandardCharsets.UTF_8));
@@ -319,7 +319,7 @@ public final class DataHandler {
         FileOutputStream fileOutputStream = null;
         Writer fileWriter;
 
-        String studioPath = Config.getProperty("studioJSON");
+        String studioPath = Config.getProperty("studiosJSON");
         try {
             fileOutputStream = new FileOutputStream(studioPath);
             fileWriter = new BufferedWriter(new OutputStreamWriter(fileOutputStream, StandardCharsets.UTF_8));

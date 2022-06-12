@@ -17,6 +17,8 @@ import java.util.LinkedHashMap;
  */
 public class Studio {
 
+    @FormParam("studioUUID")
+    @Pattern(regexp = "|[0-9a-fA-F]{8}-([0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}")
     private String studioUUID;
 
     @FormParam("studio")
@@ -24,7 +26,6 @@ public class Studio {
     @Size(min=1, max=40)
     private String studio;
 
-    @FormParam("founded")
     @JsonDeserialize(using = LocalDateDeserializer.class)
     @JsonSerialize(using = LocalDateSerializer.class)
     private LocalDate founded;
@@ -80,6 +81,10 @@ public class Studio {
      */
     public void setFounded(LocalDate founded) {
         this.founded = founded;
+    }
+
+    public void setFoundedUsingString(String founded){
+        this.founded = LocalDate.parse(founded);
     }
 
     /**

@@ -113,9 +113,8 @@ public class GameService {
         Game game = DataHandler.readGameByUUID(changedGame.getGameUUID());
         if (game != null){
             game.setTitle(changedGame.getTitle());
-            game.setRelease(LocalDate.parse(changedGame.getRelease().toString()));
-
-
+            //TODO: Make release (LocalDate) work
+            //game.setRelease(LocalDate.parse(changedGame.getRelease().toString()));
             DataHandler.updateGame();
         } else{
             httpStatus = 410;

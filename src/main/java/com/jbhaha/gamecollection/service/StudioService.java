@@ -87,9 +87,11 @@ public class StudioService {
     @Path("create")
     @Produces(MediaType.TEXT_PLAIN)
     public Response insertStudio(
-            @Valid @BeanParam Studio newStudio
+            @Valid @BeanParam Studio newStudio,
+            @FormParam("founded") String founded
     ){
         newStudio.setStudioUUID(UUID.randomUUID().toString());
+        newStudio.setFoundedUsingString(founded);
         DataHandler.insertStudio(newStudio);
         return Response
                 .status(200)
@@ -107,7 +109,8 @@ public class StudioService {
         Studio studio = DataHandler.readStudioByUUID(changedStudio.getStudioUUID());
         if (studio != null){
             studio.setStudio(changedStudio.getStudio());
-            studio.setFounded(LocalDate.parse(changedStudio.getFounded().toString()));
+            //TODO: Make founded (LocalDate) work
+            //studio.setFoundedUsingString(changedStudio.getFounded().toString());
             studio.setLocation(changedStudio.getLocation());
 
 
