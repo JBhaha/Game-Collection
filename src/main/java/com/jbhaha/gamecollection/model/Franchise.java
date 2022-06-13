@@ -7,6 +7,7 @@ import org.hibernate.validator.constraints.Range;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 import javax.ws.rs.FormParam;
+import java.util.ArrayList;
 import java.util.ListIterator;
 import java.util.Vector;
 
@@ -35,18 +36,14 @@ public class Franchise {
     @JsonIgnore
     private Studio studio;
 
-    @FormParam("gameList")
-    //@JsonIgnore
-    private Vector<Game> gameList;
+    @JsonIgnore
+    private Vector<Game> gameList = new Vector<>();
 
 
     public void setStudioUUID(String studioUUID){
         setStudio(new Studio());
         Studio studio = DataHandler.readStudioByUUID(studioUUID);
-        getStudio().setStudioUUID(studioUUID);
-        getStudio().setStudio(studio.getStudio());
-        getStudio().setFounded(studio.getFounded());
-        getStudio().setLocation(studio.getLocation());
+        this.studio = studio;
     }
 
     /**
@@ -133,7 +130,7 @@ public class Franchise {
      * gameList setter (using UUIDs)
      * @param gameUUIDs
      */
-    /*public void setGameListUsingUUIDs(Vector<String> gameUUIDs) {
+    public void setGameUUIDList(ArrayList<String> gameUUIDs) {
         ListIterator<String> iterator = gameUUIDs.listIterator();
         while (iterator.hasNext()){
             gameList.add(DataHandler.readGameByUUID(iterator.next()));
@@ -150,11 +147,16 @@ public class Franchise {
         return gameUUIDList;
     }
 
-    public void setGameUUIDListWithList(Vector<String> gameUUIDList){
+    /**public void setGameUUIDListWithList(Vector<String> gameUUIDList){
         Vector<String> arrayList = new Vector<>();
         arrayList.addAll(gameUUIDList);
         setGameListUsingUUIDs(arrayList);
     }*/
+
+    public String getStudioUUID(){
+        if (getStudio()== null) return null;
+        return getStudio().getStudioUUID();
+    }
 
     /**
      * Studio getter
