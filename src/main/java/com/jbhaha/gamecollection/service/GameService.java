@@ -107,14 +107,14 @@ public class GameService {
     @Path("update")
     @Produces(MediaType.TEXT_PLAIN)
     public Response updateGame(
-            @Valid @BeanParam Game changedGame
+            @Valid @BeanParam Game changedGame,
+            @FormParam("release") String release
     ){
         int httpStatus = 200;
         Game game = DataHandler.readGameByUUID(changedGame.getGameUUID());
         if (game != null){
             game.setTitle(changedGame.getTitle());
-            //TODO: Make release (LocalDate) work
-            //game.setRelease(LocalDate.parse(changedGame.getRelease().toString()));
+            game.setReleaseWithString(release);
             DataHandler.updateGame();
         } else{
             httpStatus = 410;

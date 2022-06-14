@@ -103,14 +103,14 @@ public class StudioService {
     @Path("update")
     @Produces(MediaType.TEXT_PLAIN)
     public Response updateStudio(
-            @Valid @BeanParam Studio changedStudio
+            @Valid @BeanParam Studio changedStudio,
+            @FormParam("founded") String founded
     ){
         int httpStatus = 200;
         Studio studio = DataHandler.readStudioByUUID(changedStudio.getStudioUUID());
         if (studio != null){
             studio.setStudio(changedStudio.getStudio());
-            //TODO: Make founded (LocalDate) work
-            //studio.setFoundedUsingString(changedStudio.getFounded().toString());
+            studio.setFoundedUsingString(founded);
             studio.setLocation(changedStudio.getLocation());
 
 
