@@ -18,21 +18,21 @@ import java.util.Vector;
 public class Franchise {
 
     @FormParam("franchiseUUID")
-    @Pattern(regexp= "|[0-9a-fA-F]{8}-([0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}")
+    @Pattern(regexp = "|[0-9a-fA-F]{8}-([0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}")
     private String franchiseUUID;
 
     @FormParam("franchise")
     @NotEmpty
-    @Size(min=1, max=40)
+    @Size(min = 1, max = 40)
     private String franchise;
 
     @FormParam("genre")
     @NotEmpty
-    @Size(min=1, max=40)
+    @Size(min = 1, max = 40)
     private String genre;
 
     @FormParam("games")
-    @Range(min=1, max=20)
+    @Range(min = 1, max = 20)
     private Integer games;
 
     @JsonIgnore
@@ -41,8 +41,12 @@ public class Franchise {
     @JsonIgnore
     private Vector<Game> gameList = new Vector<>();
 
-
-    public void setStudioUUID(String studioUUID){
+    /**
+     * studioUUID setter
+     *
+     * @param studioUUID
+     */
+    public void setStudioUUID(String studioUUID) {
         setStudio(new Studio());
         Studio studio = DataHandler.readStudioByUUID(studioUUID);
         this.studio = studio;
@@ -50,6 +54,7 @@ public class Franchise {
 
     /**
      * FranchiseUUID getter
+     *
      * @return franchiseUUID
      */
     public String getFranchiseUUID() {
@@ -58,6 +63,7 @@ public class Franchise {
 
     /**
      * FranchiseUUID setter
+     *
      * @param franchiseUUID
      */
     public void setFranchiseUUID(String franchiseUUID) {
@@ -66,6 +72,7 @@ public class Franchise {
 
     /**
      * Franchise getter
+     *
      * @return franchise
      */
     public String getFranchise() {
@@ -74,6 +81,7 @@ public class Franchise {
 
     /**
      * Franchise setter
+     *
      * @param franchise
      */
     public void setFranchise(String franchise) {
@@ -82,6 +90,7 @@ public class Franchise {
 
     /**
      * Genre getter
+     *
      * @return genre
      */
     public String getGenre() {
@@ -90,6 +99,7 @@ public class Franchise {
 
     /**
      * Genre setter
+     *
      * @param genre
      */
     public void setGenre(String genre) {
@@ -98,6 +108,7 @@ public class Franchise {
 
     /**
      * Games getter
+     *
      * @return games
      */
     public Integer getGames() {
@@ -106,6 +117,7 @@ public class Franchise {
 
     /**
      * Games setter
+     *
      * @param games
      */
     public void setGames(Integer games) {
@@ -114,6 +126,7 @@ public class Franchise {
 
     /**
      * gameList getter
+     *
      * @return gameList
      */
     public Vector<Game> getGameList() {
@@ -122,6 +135,7 @@ public class Franchise {
 
     /**
      * gameList setter
+     *
      * @param gameList
      */
     public void setGameList(Vector<Game> gameList) {
@@ -130,38 +144,44 @@ public class Franchise {
 
     /**
      * gameList setter (using UUIDs)
+     *
      * @param gameUUIDs
      */
     public void setGameUUIDList(ArrayList<String> gameUUIDs) {
         ListIterator<String> iterator = gameUUIDs.listIterator();
-        while (iterator.hasNext()){
+        while (iterator.hasNext()) {
             gameList.add(DataHandler.readGameByUUID(iterator.next()));
         }
     }
 
-    public Vector<String> getGameUUIDList(){
+    /**
+     * GameUUIDList getter
+     *
+     * @return gameUUIDList
+     */
+    public Vector<String> getGameUUIDList() {
         Vector<String> gameUUIDList = new Vector<>();
         ListIterator<Game> iterator = gameList.listIterator();
-        while (iterator.hasNext()){
+        while (iterator.hasNext()) {
             String gameUUID = iterator.next().getGameUUID();
             gameUUIDList.add(gameUUID);
         }
         return gameUUIDList;
     }
 
-    /**public void setGameUUIDListWithList(Vector<String> gameUUIDList){
-        Vector<String> arrayList = new Vector<>();
-        arrayList.addAll(gameUUIDList);
-        setGameListUsingUUIDs(arrayList);
-    }*/
-
-    public String getStudioUUID(){
-        if (getStudio()== null) return null;
+    /**
+     * studioUUID getter
+     *
+     * @return studioUUID
+     */
+    public String getStudioUUID() {
+        if (getStudio() == null) return null;
         return getStudio().getStudioUUID();
     }
 
     /**
      * Studio getter
+     *
      * @return studio
      */
     public Studio getStudio() {
@@ -170,6 +190,7 @@ public class Franchise {
 
     /**
      * Studio setter
+     *
      * @param studio
      */
     public void setStudio(Studio studio) {

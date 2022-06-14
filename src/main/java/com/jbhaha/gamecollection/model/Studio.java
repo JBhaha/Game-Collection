@@ -10,7 +10,6 @@ import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 import javax.ws.rs.FormParam;
 import java.time.LocalDate;
-import java.util.LinkedHashMap;
 
 /**
  * Studio model class
@@ -23,7 +22,7 @@ public class Studio {
 
     @FormParam("studio")
     @NotEmpty
-    @Size(min=1, max=40)
+    @Size(min = 1, max = 40)
     private String studio;
 
     @JsonDeserialize(using = LocalDateDeserializer.class)
@@ -37,6 +36,7 @@ public class Studio {
 
     /**
      * StudioUUID getter
+     *
      * @return studioUUID
      */
     public String getStudioUUID() {
@@ -45,6 +45,7 @@ public class Studio {
 
     /**
      * StudioUUID setter
+     *
      * @param studioUUID
      */
     public void setStudioUUID(String studioUUID) {
@@ -53,6 +54,7 @@ public class Studio {
 
     /**
      * Studio getter
+     *
      * @return studio
      */
     public String getStudio() {
@@ -61,6 +63,7 @@ public class Studio {
 
     /**
      * Studio setter
+     *
      * @param studio
      */
     public void setStudio(String studio) {
@@ -69,6 +72,7 @@ public class Studio {
 
     /**
      * Founded getter
+     *
      * @return founded
      */
     public LocalDate getFounded() {
@@ -77,18 +81,25 @@ public class Studio {
 
     /**
      * Founded setter
+     *
      * @param founded
      */
     public void setFounded(LocalDate founded) {
         this.founded = founded;
     }
 
-    public void setFoundedUsingString(String founded){
+    /**
+     * founded setter using String instead of LocalDate
+     *
+     * @param founded
+     */
+    public void setFoundedUsingString(String founded) {
         this.founded = LocalDate.parse(founded);
     }
 
     /**
      * Location getter
+     *
      * @return location
      */
     public String getLocation() {
@@ -97,6 +108,7 @@ public class Studio {
 
     /**
      * Location setter
+     *
      * @param location
      */
     public void setLocation(String location) {

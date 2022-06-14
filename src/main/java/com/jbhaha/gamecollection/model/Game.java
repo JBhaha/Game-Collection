@@ -17,12 +17,12 @@ import java.time.LocalDate;
 public class Game {
 
     @FormParam("gameUUID")
-    @Pattern(regexp= "|[0-9a-fA-F]{8}-([0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}")
+    @Pattern(regexp = "|[0-9a-fA-F]{8}-([0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}")
     private String gameUUID;
 
     @FormParam("title")
     @NotEmpty
-    @Size(min=1, max=40)
+    @Size(min = 1, max = 40)
     private String title;
 
     @JsonDeserialize(using = LocalDateDeserializer.class)
@@ -31,6 +31,7 @@ public class Game {
 
     /**
      * GameUUID getter
+     *
      * @return gameUUID
      */
     public String getGameUUID() {
@@ -39,6 +40,7 @@ public class Game {
 
     /**
      * GameUUID setter
+     *
      * @param gameUUID
      */
     public void setGameUUID(String gameUUID) {
@@ -47,6 +49,7 @@ public class Game {
 
     /**
      * Title getter
+     *
      * @return title
      */
     public String getTitle() {
@@ -55,6 +58,7 @@ public class Game {
 
     /**
      * Title setter
+     *
      * @param title
      */
     public void setTitle(String title) {
@@ -63,6 +67,7 @@ public class Game {
 
     /**
      * Release getter
+     *
      * @return release
      */
     public LocalDate getRelease() {
@@ -71,13 +76,19 @@ public class Game {
 
     /**
      * Release setter
+     *
      * @param release
      */
     public void setRelease(LocalDate release) {
         this.release = release;
     }
 
-    public void setReleaseWithString(String release){
+    /**
+     * Release setter using String instead of LocalDate
+     *
+     * @param release
+     */
+    public void setReleaseWithString(String release) {
         this.release = LocalDate.parse(release);
     }
 }

@@ -66,6 +66,11 @@ public class StudioService {
                 .build();
     }
 
+    /**
+     * deletes a studio
+     * @param studioUUID
+     * @return response with httpStatus
+     */
     @DELETE
     @Path("delete")
     @Produces(MediaType.TEXT_PLAIN)
@@ -83,6 +88,12 @@ public class StudioService {
                 .build();
     }
 
+    /**
+     * adds new studio
+     * @param newStudio
+     * @param founded
+     * @return response with httpStatus
+     */
     @POST
     @Path("create")
     @Produces(MediaType.TEXT_PLAIN)
@@ -99,6 +110,12 @@ public class StudioService {
                 .build();
     }
 
+    /**
+     * changes a studio
+     * @param changedStudio
+     * @param founded
+     * @return response with httpStatus
+     */
     @PUT
     @Path("update")
     @Produces(MediaType.TEXT_PLAIN)

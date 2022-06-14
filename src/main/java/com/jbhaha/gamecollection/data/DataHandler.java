@@ -83,8 +83,9 @@ public final class DataHandler {
 
     /**
      * deletes a game identified by the gameUUID
-     * @param gameUUID  the key
-     * @return  success=true/false
+     *
+     * @param gameUUID the key
+     * @return success=true/false
      */
     public static boolean deleteGame(String gameUUID) {
         Game game = readGameByUUID(gameUUID);
@@ -142,8 +143,9 @@ public final class DataHandler {
 
     /**
      * deletes a franchise identified by the franchiseUUID
-     * @param franchiseUUID  the key
-     * @return  success=true/false
+     *
+     * @param franchiseUUID the key
+     * @return success=true/false
      */
     public static boolean deleteFranchise(String franchiseUUID) {
         Franchise franchise = readFranchiseByUUID(franchiseUUID);
@@ -200,8 +202,9 @@ public final class DataHandler {
 
     /**
      * deletes a studio identified by the studioUUID
-     * @param studioUUID  the key
-     * @return  success=true/false
+     *
+     * @param studioUUID the key
+     * @return success=true/false
      */
     public static boolean deleteStudio(String studioUUID) {
         Studio studio = readStudioByUUID(studioUUID);
@@ -381,6 +384,11 @@ public final class DataHandler {
         return studioList;
     }
 
+    /**
+     * sets studioList
+     *
+     * @param studioList
+     */
     public static void setStudioList(List<Studio> studioList) {
         DataHandler.studioList = studioList;
     }

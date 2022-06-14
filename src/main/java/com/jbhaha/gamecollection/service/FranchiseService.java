@@ -8,7 +8,6 @@ import javax.validation.constraints.Pattern;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import java.time.LocalDate;
 import java.util.List;
 import java.util.UUID;
 
@@ -66,6 +65,11 @@ public class FranchiseService {
                 .build();
     }
 
+    /**
+     * deletes a franchise
+     * @param franchiseUUID
+     * @return response with httpStatus
+     */
     @DELETE
     @Path("delete")
     @Produces(MediaType.TEXT_PLAIN)
@@ -83,6 +87,12 @@ public class FranchiseService {
                 .build();
     }
 
+    /**
+     * adds new franchise
+     * @param newFranchise
+     * @param studioUUID
+     * @return response with httpStatus
+     */
     @POST
     @Path("create")
     @Produces(MediaType.TEXT_PLAIN)
@@ -99,6 +109,11 @@ public class FranchiseService {
                 .build();
     }
 
+    /**
+     * changes a franchise
+     * @param changedFranchise
+     * @return response with httpStatus
+     */
     @PUT
     @Path("update")
     @Produces(MediaType.TEXT_PLAIN)
