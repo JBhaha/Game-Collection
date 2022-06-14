@@ -1187,7 +1187,1851 @@
 		},
 		{
 			"name": "wrong",
-			"item": []
+			"item": [
+				{
+					"name": "3.1.1 Delete game UUID formally wrong",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status test\", function(){",
+									"    pm.response.to.have.status(400);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/Game-Collection-1.0/resource/game/delete?uuid=NotAnUUID",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"Game-Collection-1.0",
+								"resource",
+								"game",
+								"delete"
+							],
+							"query": [
+								{
+									"key": "uuid",
+									"value": "NotAnUUID"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "3.1.2 Update game UUID formally wrong",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status test\", function(){",
+									"    pm.response.to.have.status(400);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "gameUUID",
+									"value": "NotAnUUID",
+									"type": "text"
+								},
+								{
+									"key": "title",
+									"value": "NewGame",
+									"type": "text"
+								},
+								{
+									"key": "release",
+									"value": "1990-01-01",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8080/Game-Collection-1.0/resource/game/update",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"Game-Collection-1.0",
+								"resource",
+								"game",
+								"update"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "3.1.3 Update game title too long",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status test\", function(){",
+									"    pm.response.to.have.status(400);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "gameUUID",
+									"value": "5dcfedb9-a3e8-4a8e-8365-59c44be8259b",
+									"type": "text"
+								},
+								{
+									"key": "title",
+									"value": "This is a very long title and I don't really think a title should be this long.",
+									"type": "text"
+								},
+								{
+									"key": "release",
+									"value": "1990-01-01",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8080/Game-Collection-1.0/resource/game/update",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"Game-Collection-1.0",
+								"resource",
+								"game",
+								"update"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "3.1.4 Update game title too short (empty)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status test\", function(){",
+									"    pm.response.to.have.status(400);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "gameUUID",
+									"value": "5dcfedb9-a3e8-4a8e-8365-59c44be8259b",
+									"type": "text"
+								},
+								{
+									"key": "title",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "release",
+									"value": "1990-01-01",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8080/Game-Collection-1.0/resource/game/update",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"Game-Collection-1.0",
+								"resource",
+								"game",
+								"update"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "3.1.5 Create game title too long",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status test\", function(){",
+									"    pm.response.to.have.status(400);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "title",
+									"value": "This is a very long title and I don't really think a title should be this long.",
+									"type": "text"
+								},
+								{
+									"key": "release",
+									"value": "2015-06-04",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8080/Game-Collection-1.0/resource/game/create",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"Game-Collection-1.0",
+								"resource",
+								"game",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "3.1.6 Create game title too short (empty)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status test\", function(){",
+									"    pm.response.to.have.status(400);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "title",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "release",
+									"value": "2015-06-04",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8080/Game-Collection-1.0/resource/game/create",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"Game-Collection-1.0",
+								"resource",
+								"game",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "3.2.1 Delete franchise UUID formally wrong",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status test\", function(){",
+									"    pm.response.to.have.status(400);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/Game-Collection-1.0/resource/franchise/delete?uuid=NotAnUUID",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"Game-Collection-1.0",
+								"resource",
+								"franchise",
+								"delete"
+							],
+							"query": [
+								{
+									"key": "uuid",
+									"value": "NotAnUUID"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "3.2.2 Update franchise UUID formally wrong",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status test\", function(){",
+									"    pm.response.to.have.status(400);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "franchiseUUID",
+									"value": "NotAnUUID",
+									"type": "text"
+								},
+								{
+									"key": "franchise",
+									"value": "changedFranchise",
+									"type": "text"
+								},
+								{
+									"key": "genre",
+									"value": "horror",
+									"type": "text"
+								},
+								{
+									"key": "games",
+									"value": "2",
+									"type": "text"
+								},
+								{
+									"key": "studioUUID",
+									"value": "fe493c72-8b32-4201-a6d7-5c80628b5442",
+									"type": "text"
+								},
+								{
+									"key": "gameList",
+									"value": "[]",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8080/Game-Collection-1.0/resource/franchise/update",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"Game-Collection-1.0",
+								"resource",
+								"franchise",
+								"update"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "3.2.3 Update franchise title too long",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status test\", function(){",
+									"    pm.response.to.have.status(400);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "franchiseUUID",
+									"value": "7954ee76-cceb-4f3d-887c-7b933351712d",
+									"type": "text"
+								},
+								{
+									"key": "franchise",
+									"value": "This is a very long title and I don't really think a title should be this long.",
+									"type": "text"
+								},
+								{
+									"key": "genre",
+									"value": "horror",
+									"type": "text"
+								},
+								{
+									"key": "games",
+									"value": "2",
+									"type": "text"
+								},
+								{
+									"key": "studioUUID",
+									"value": "fe493c72-8b32-4201-a6d7-5c80628b5442",
+									"type": "text"
+								},
+								{
+									"key": "gameList",
+									"value": "[]",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8080/Game-Collection-1.0/resource/franchise/update",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"Game-Collection-1.0",
+								"resource",
+								"franchise",
+								"update"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "3.2.4 Update franchise title too short (empty)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status test\", function(){",
+									"    pm.response.to.have.status(400);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "franchiseUUID",
+									"value": "7954ee76-cceb-4f3d-887c-7b933351712d",
+									"type": "text"
+								},
+								{
+									"key": "franchise",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "genre",
+									"value": "horror",
+									"type": "text"
+								},
+								{
+									"key": "games",
+									"value": "2",
+									"type": "text"
+								},
+								{
+									"key": "studioUUID",
+									"value": "fe493c72-8b32-4201-a6d7-5c80628b5442",
+									"type": "text"
+								},
+								{
+									"key": "gameList",
+									"value": "[]",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8080/Game-Collection-1.0/resource/franchise/update",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"Game-Collection-1.0",
+								"resource",
+								"franchise",
+								"update"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "3.2.5 Update franchise genre too long",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status test\", function(){",
+									"    pm.response.to.have.status(400);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "franchiseUUID",
+									"value": "7954ee76-cceb-4f3d-887c-7b933351712d",
+									"type": "text"
+								},
+								{
+									"key": "franchise",
+									"value": "changedFranchise",
+									"type": "text"
+								},
+								{
+									"key": "genre",
+									"value": "This is a very long title for a genre and I don't really think a title should be this long.",
+									"type": "text"
+								},
+								{
+									"key": "games",
+									"value": "2",
+									"type": "text"
+								},
+								{
+									"key": "studioUUID",
+									"value": "fe493c72-8b32-4201-a6d7-5c80628b5442",
+									"type": "text"
+								},
+								{
+									"key": "gameList",
+									"value": "[]",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8080/Game-Collection-1.0/resource/franchise/update",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"Game-Collection-1.0",
+								"resource",
+								"franchise",
+								"update"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "3.2.6 Update franchise genre too short (empty)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status test\", function(){",
+									"    pm.response.to.have.status(400);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "franchiseUUID",
+									"value": "7954ee76-cceb-4f3d-887c-7b933351712d",
+									"type": "text"
+								},
+								{
+									"key": "franchise",
+									"value": "changedFranchise",
+									"type": "text"
+								},
+								{
+									"key": "genre",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "games",
+									"value": "2",
+									"type": "text"
+								},
+								{
+									"key": "studioUUID",
+									"value": "fe493c72-8b32-4201-a6d7-5c80628b5442",
+									"type": "text"
+								},
+								{
+									"key": "gameList",
+									"value": "[]",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8080/Game-Collection-1.0/resource/franchise/update",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"Game-Collection-1.0",
+								"resource",
+								"franchise",
+								"update"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "3.2.7 Update franchise games too big",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status test\", function(){",
+									"    pm.response.to.have.status(400);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "franchiseUUID",
+									"value": "7954ee76-cceb-4f3d-887c-7b933351712d",
+									"type": "text"
+								},
+								{
+									"key": "franchise",
+									"value": "changedFranchise",
+									"type": "text"
+								},
+								{
+									"key": "genre",
+									"value": "horror",
+									"type": "text"
+								},
+								{
+									"key": "games",
+									"value": "21",
+									"type": "text"
+								},
+								{
+									"key": "studioUUID",
+									"value": "fe493c72-8b32-4201-a6d7-5c80628b5442",
+									"type": "text"
+								},
+								{
+									"key": "gameList",
+									"value": "[]",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8080/Game-Collection-1.0/resource/franchise/update",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"Game-Collection-1.0",
+								"resource",
+								"franchise",
+								"update"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "3.2.8 Update franchise games too small",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status test\", function(){",
+									"    pm.response.to.have.status(400);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "franchiseUUID",
+									"value": "7954ee76-cceb-4f3d-887c-7b933351712d",
+									"type": "text"
+								},
+								{
+									"key": "franchise",
+									"value": "changedFranchise",
+									"type": "text"
+								},
+								{
+									"key": "genre",
+									"value": "horror",
+									"type": "text"
+								},
+								{
+									"key": "games",
+									"value": "0",
+									"type": "text"
+								},
+								{
+									"key": "studioUUID",
+									"value": "fe493c72-8b32-4201-a6d7-5c80628b5442",
+									"type": "text"
+								},
+								{
+									"key": "gameList",
+									"value": "[]",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8080/Game-Collection-1.0/resource/franchise/update",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"Game-Collection-1.0",
+								"resource",
+								"franchise",
+								"update"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "3.2.9 Update franchise games formally wrong",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status test\", function(){",
+									"    pm.response.to.have.status(400);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "franchiseUUID",
+									"value": "7954ee76-cceb-4f3d-887c-7b933351712d",
+									"type": "text"
+								},
+								{
+									"key": "franchise",
+									"value": "changedFranchise",
+									"type": "text"
+								},
+								{
+									"key": "genre",
+									"value": "horror",
+									"type": "text"
+								},
+								{
+									"key": "games",
+									"value": "This is not a number.",
+									"type": "text"
+								},
+								{
+									"key": "studioUUID",
+									"value": "fe493c72-8b32-4201-a6d7-5c80628b5442",
+									"type": "text"
+								},
+								{
+									"key": "gameList",
+									"value": "[]",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8080/Game-Collection-1.0/resource/franchise/update",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"Game-Collection-1.0",
+								"resource",
+								"franchise",
+								"update"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "3.2.10 Create franchise title too long",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status test\", function(){",
+									"    pm.response.to.have.status(400);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "franchiseUUID",
+									"value": "7954ee76-cceb-4f3d-887c-7b933351712d",
+									"type": "text"
+								},
+								{
+									"key": "franchise",
+									"value": "This is a very long title and I don't really think a title should be this long.",
+									"type": "text"
+								},
+								{
+									"key": "genre",
+									"value": "horror",
+									"type": "text"
+								},
+								{
+									"key": "games",
+									"value": "2",
+									"type": "text"
+								},
+								{
+									"key": "studioUUID",
+									"value": "fe493c72-8b32-4201-a6d7-5c80628b5442",
+									"type": "text"
+								},
+								{
+									"key": "gameList",
+									"value": "[]",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8080/Game-Collection-1.0/resource/franchise/create",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"Game-Collection-1.0",
+								"resource",
+								"franchise",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "3.2.11 Create franchise title too short (empty)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status test\", function(){",
+									"    pm.response.to.have.status(400);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "franchiseUUID",
+									"value": "7954ee76-cceb-4f3d-887c-7b933351712d",
+									"type": "text"
+								},
+								{
+									"key": "franchise",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "genre",
+									"value": "horror",
+									"type": "text"
+								},
+								{
+									"key": "games",
+									"value": "2",
+									"type": "text"
+								},
+								{
+									"key": "studioUUID",
+									"value": "fe493c72-8b32-4201-a6d7-5c80628b5442",
+									"type": "text"
+								},
+								{
+									"key": "gameList",
+									"value": "[]",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8080/Game-Collection-1.0/resource/franchise/create",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"Game-Collection-1.0",
+								"resource",
+								"franchise",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "3.2.12 Create franchise genre too long",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status test\", function(){",
+									"    pm.response.to.have.status(400);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "franchiseUUID",
+									"value": "7954ee76-cceb-4f3d-887c-7b933351712d",
+									"type": "text"
+								},
+								{
+									"key": "franchise",
+									"value": "newFranchise",
+									"type": "text"
+								},
+								{
+									"key": "genre",
+									"value": "This is a very long title for a genre and I don't really think a title should be this long.",
+									"type": "text"
+								},
+								{
+									"key": "games",
+									"value": "2",
+									"type": "text"
+								},
+								{
+									"key": "studioUUID",
+									"value": "fe493c72-8b32-4201-a6d7-5c80628b5442",
+									"type": "text"
+								},
+								{
+									"key": "gameList",
+									"value": "[]",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8080/Game-Collection-1.0/resource/franchise/create",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"Game-Collection-1.0",
+								"resource",
+								"franchise",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "3.2.13 Create franchise genre too short (empty)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status test\", function(){",
+									"    pm.response.to.have.status(400);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "franchiseUUID",
+									"value": "7954ee76-cceb-4f3d-887c-7b933351712d",
+									"type": "text"
+								},
+								{
+									"key": "franchise",
+									"value": "newFranchise",
+									"type": "text"
+								},
+								{
+									"key": "genre",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "games",
+									"value": "2",
+									"type": "text"
+								},
+								{
+									"key": "studioUUID",
+									"value": "fe493c72-8b32-4201-a6d7-5c80628b5442",
+									"type": "text"
+								},
+								{
+									"key": "gameList",
+									"value": "[]",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8080/Game-Collection-1.0/resource/franchise/create",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"Game-Collection-1.0",
+								"resource",
+								"franchise",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "3.2.14 Create franchise games too big",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status test\", function(){",
+									"    pm.response.to.have.status(400);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "franchiseUUID",
+									"value": "7954ee76-cceb-4f3d-887c-7b933351712d",
+									"type": "text"
+								},
+								{
+									"key": "franchise",
+									"value": "newFranchise",
+									"type": "text"
+								},
+								{
+									"key": "genre",
+									"value": "horror",
+									"type": "text"
+								},
+								{
+									"key": "games",
+									"value": "21",
+									"type": "text"
+								},
+								{
+									"key": "studioUUID",
+									"value": "fe493c72-8b32-4201-a6d7-5c80628b5442",
+									"type": "text"
+								},
+								{
+									"key": "gameList",
+									"value": "[]",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8080/Game-Collection-1.0/resource/franchise/create",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"Game-Collection-1.0",
+								"resource",
+								"franchise",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "3.2.15 Create franchise games too small",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status test\", function(){",
+									"    pm.response.to.have.status(400);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "franchiseUUID",
+									"value": "7954ee76-cceb-4f3d-887c-7b933351712d",
+									"type": "text"
+								},
+								{
+									"key": "franchise",
+									"value": "newFranchise",
+									"type": "text"
+								},
+								{
+									"key": "genre",
+									"value": "horror",
+									"type": "text"
+								},
+								{
+									"key": "games",
+									"value": "0",
+									"type": "text"
+								},
+								{
+									"key": "studioUUID",
+									"value": "fe493c72-8b32-4201-a6d7-5c80628b5442",
+									"type": "text"
+								},
+								{
+									"key": "gameList",
+									"value": "[]",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8080/Game-Collection-1.0/resource/franchise/create",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"Game-Collection-1.0",
+								"resource",
+								"franchise",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "3.2.16 Create franchise games formally wrong",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status test\", function(){",
+									"    pm.response.to.have.status(400);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "franchiseUUID",
+									"value": "7954ee76-cceb-4f3d-887c-7b933351712d",
+									"type": "text"
+								},
+								{
+									"key": "franchise",
+									"value": "newFranchise",
+									"type": "text"
+								},
+								{
+									"key": "genre",
+									"value": "horror",
+									"type": "text"
+								},
+								{
+									"key": "games",
+									"value": "This is not a number.",
+									"type": "text"
+								},
+								{
+									"key": "studioUUID",
+									"value": "fe493c72-8b32-4201-a6d7-5c80628b5442",
+									"type": "text"
+								},
+								{
+									"key": "gameList",
+									"value": "[]",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8080/Game-Collection-1.0/resource/franchise/create",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"Game-Collection-1.0",
+								"resource",
+								"franchise",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "3.3.1 Delete studio UUID formally wrong",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status test\", function(){",
+									"    pm.response.to.have.status(400);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/Game-Collection-1.0/resource/studio/delete?uuid=NotAnUUID",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"Game-Collection-1.0",
+								"resource",
+								"studio",
+								"delete"
+							],
+							"query": [
+								{
+									"key": "uuid",
+									"value": "NotAnUUID"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "3.3.2 Update studio UUID formally wrong",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status test\", function(){",
+									"    pm.response.to.have.status(400);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "studioUUID",
+									"value": "NotAnUUID",
+									"type": "text"
+								},
+								{
+									"key": "studio",
+									"value": "newStudio",
+									"type": "text"
+								},
+								{
+									"key": "founded",
+									"value": "1998-03-23",
+									"type": "text"
+								},
+								{
+									"key": "location",
+									"value": "Warsaw, Poland, GMT+1",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8080/Game-Collection-1.0/resource/studio/update",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"Game-Collection-1.0",
+								"resource",
+								"studio",
+								"update"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "3.3.3 Update studio title too long",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status test\", function(){",
+									"    pm.response.to.have.status(400);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "studioUUID",
+									"value": "fe493c72-8b32-4201-a6d7-5c80628b5442",
+									"type": "text"
+								},
+								{
+									"key": "studio",
+									"value": "This is a very long title and I don't really think a title should be this long.",
+									"type": "text"
+								},
+								{
+									"key": "founded",
+									"value": "1998-03-23",
+									"type": "text"
+								},
+								{
+									"key": "location",
+									"value": "Warsaw, Poland, GMT+1",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8080/Game-Collection-1.0/resource/studio/update",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"Game-Collection-1.0",
+								"resource",
+								"studio",
+								"update"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "3.3.4 Update studio title too short (empty)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status test\", function(){",
+									"    pm.response.to.have.status(400);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "studioUUID",
+									"value": "fe493c72-8b32-4201-a6d7-5c80628b5442",
+									"type": "text"
+								},
+								{
+									"key": "studio",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "founded",
+									"value": "1998-03-23",
+									"type": "text"
+								},
+								{
+									"key": "location",
+									"value": "Warsaw, Poland, GMT+1",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8080/Game-Collection-1.0/resource/studio/update",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"Game-Collection-1.0",
+								"resource",
+								"studio",
+								"update"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "3.3.5 Update studio location formally wrong",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status test\", function(){",
+									"    pm.response.to.have.status(400);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "studioUUID",
+									"value": "fe493c72-8b32-4201-a6d7-5c80628b5442",
+									"type": "text"
+								},
+								{
+									"key": "studio",
+									"value": "newStudio",
+									"type": "text"
+								},
+								{
+									"key": "founded",
+									"value": "1998-03-23",
+									"type": "text"
+								},
+								{
+									"key": "location",
+									"value": "Somewhere",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8080/Game-Collection-1.0/resource/studio/update",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"Game-Collection-1.0",
+								"resource",
+								"studio",
+								"update"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "3.3.6 Create studio title too long",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status test\", function(){",
+									"    pm.response.to.have.status(400);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "studio",
+									"value": "This is a very long title and I don't really think a title should be this long.",
+									"type": "text"
+								},
+								{
+									"key": "founded",
+									"value": "1998-03-23",
+									"type": "text"
+								},
+								{
+									"key": "location",
+									"value": "Warsaw, Poland, GMT+1",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8080/Game-Collection-1.0/resource/studio/create",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"Game-Collection-1.0",
+								"resource",
+								"studio",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "3.3.7 Create studio title too short",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status test\", function(){",
+									"    pm.response.to.have.status(400);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "studio",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "founded",
+									"value": "1998-03-23",
+									"type": "text"
+								},
+								{
+									"key": "location",
+									"value": "Warsaw, Poland, GMT+1",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8080/Game-Collection-1.0/resource/studio/create",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"Game-Collection-1.0",
+								"resource",
+								"studio",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "3.3.8 Create studio location formally wrong",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status test\", function(){",
+									"    pm.response.to.have.status(400);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "studio",
+									"value": "newStudio",
+									"type": "text"
+								},
+								{
+									"key": "founded",
+									"value": "1998-03-23",
+									"type": "text"
+								},
+								{
+									"key": "location",
+									"value": "Somewhere",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8080/Game-Collection-1.0/resource/studio/create",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"Game-Collection-1.0",
+								"resource",
+								"studio",
+								"create"
+							]
+						}
+					},
+					"response": []
+				}
+			]
 		},
 		{
 			"name": "0.1 Testservice",
