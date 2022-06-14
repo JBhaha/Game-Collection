@@ -5,13 +5,7 @@
         "genre": "Sandbox",
         "games": 4,
         "studioUUID": "c3f8b9d8-c436-4b28-b38d-482ad8240f32",
-        "gameList": [
-            {
-        "gameUUID": "2cb978ea-c305-4982-a1dd-cf93bffa9baa",
-        "title": "Minecraft: Java Edition",
-        "release": "2011-11-18"
-    }
-        ]
+        "gameUUIDList": ["2cb978ea-c305-4982-a1dd-cf93bffa9baa"]
     },
     {
         "franchiseUUID": "7954ee76-cceb-4f3d-887c-7b933351712d",
@@ -19,13 +13,7 @@
         "genre": "Science-Fiction",
         "games": 1,
         "studioUUID": "b0aa7901-e783-41bc-b963-496de2a8ce2b",
-        "gameList": [
-            {
-        "gameUUID": "5dcfedb9-a3e8-4a8e-8365-59c44be8259a",
-        "title": "Cyberpunk 2077",
-        "release": "2020-12-10"
-    }
-        ]
+        "gameUUIDList": ["5dcfedb9-a3e8-4a8e-8365-59c44be8259a"]
     },
     {
         "franchiseUUID": "b5786c04-9b85-44f0-9116-04c060e2bd14",
@@ -33,13 +21,7 @@
         "genre": "Ego-Shooter",
         "games": 2,
         "studioUUID": "fe493c72-8b32-4201-a6d7-5c80628b5442",
-        "gameList": [
-            {
-        "gameUUID": "8a7eaf0c-2e00-4b5c-ad86-0e374fb1db01",
-        "title": "Tom Clancy's Rainbow Six Siege",
-        "release": "2015-12-01"
-    }
-        ]
+        "gameUUIDList": ["8a7eaf0c-2e00-4b5c-ad86-0e374fb1db01"]
     },
     {
         "franchiseUUID": "5f83e500-4d84-47a8-9c61-3cdaaa11ba9a",
@@ -47,12 +29,6 @@
         "genre": "Amateur flight simulation",
         "games": 2,
         "studioUUID": "e6e6e0b2-785c-4736-b682-b6f9dc0377a5",
-        "gameList": [
-            {
-        "gameUUID": "76a40135-d6d7-472f-8d75-d80db027dcbd",
-        "title": "Microsoft Flight Simulator",
-        "release": "2020-08-18"
-    }
-        ]
+        "gameUUIDList": ["76a40135-d6d7-472f-8d75-d80db027dcbd"]
     }
 ]
