@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.ObjectWriter;
 import com.jbhaha.gamecollection.model.Game;
 import com.jbhaha.gamecollection.model.Franchise;
 import com.jbhaha.gamecollection.model.Studio;
+import com.jbhaha.gamecollection.model.User;
 import com.jbhaha.gamecollection.service.Config;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -23,6 +24,7 @@ public final class DataHandler {
     private static List<Game> gameList;
     private static List<Franchise> franchiseList;
     private static List<Studio> studioList;
+    private static List<User> userList;
 
     /**
      * private constructor defeats instantiation
@@ -214,6 +216,16 @@ public final class DataHandler {
         }
     }
 
+    public String readUserRole(String username, String password) {
+        for (User user : getUserList()) {
+            if (user.getUserName().equals(username) &&
+                    user.getPassword().equals(password)) {
+                return user.getUserName();
+            }
+        }
+        return "guest";
+    }
+
     /**
      * reads the games from the JSON-file
      */
@@ -330,6 +342,26 @@ public final class DataHandler {
     }
 
     /**
+     * reads the users from the JSON-file
+     */
+    private static void readUserJSON() {
+        try {
+            byte[] jsonData = Files.readAllBytes(
+                    Paths.get(
+                            Config.getProperty("userJSON")
+                    )
+            );
+            ObjectMapper objectMapper = new ObjectMapper();
+            User[] users = objectMapper.readValue(jsonData, User[].class);
+            for (User user : users) {
+                getUserList().add(user);
+            }
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    /**
      * gets gameList
      *
      * @return value of gameList
@@ -384,4 +416,28 @@ public final class DataHandler {
     public static void setStudioList(List<Studio> studioList) {
         DataHandler.studioList = studioList;
     }
+
+    /**
+     * gets userList
+     *
+     * @return value of userList
+     */
+    public static List<User> getUserList() {
+        if (DataHandler.userList == null) {
+            DataHandler.setUserList(new ArrayList<>());
+            readUserJSON();
+        }
+        return userList;
+    }
+
+    /**
+     * sets userList
+     *
+     * @param userList the value to set
+     */
+
+    public static void setUserList(List<User> userList) {
+        DataHandler.userList = userList;
+    }
+
 }
