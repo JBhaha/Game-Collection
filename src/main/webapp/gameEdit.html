@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit game</title>
+    <script src="./js/util.js"></script>
+    <script src="./js/gameEdit.js"></script>
+</head>
+<body>
+    <h1>Edit game</h1>
+    <form id="gameEditForm" name="gameEdit">
+        <table>
+            <tr>
+                <td><label for="title">Title</label></td>
+                <td>
+                    <input id="title" name="title" type="text" size="40" minlength="1" maxlength="40" required/>
+                    <input id="gameUUID" name="gameUUID" type="hidden"/>
+                </td>
+            </tr>
+            <tr>
+                <td><label for="release">Release</label></td>
+                <td><input id="release" name="release" type="text"/></td>
+            </tr>
+        </table>
+        <table>
+            <tr>
+                <td>
+                    <button id="save" type="submit">Speichern</button>
+                </td>
+                <td>
+                    <button id="reset" type="reset">Zurücksetzen</button>
+                </td>
+                <td>
+                    <button id="cancel" type="button">Abbruch</button>
+                </td>
+            </tr>
+        </table>
+    </form>
+</body>
+</html>
