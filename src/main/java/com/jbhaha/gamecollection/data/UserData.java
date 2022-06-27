@@ -14,7 +14,7 @@ public class UserData {
         List<User> userList = DataHandler.getUserList();
 
         for (User entry : userList){
-            if (entry.getUserName().equals(username) && entry.getPassword().equals(password)){
+            if (entry.getUsername().equals(username) && entry.getPassword().equals(password)){
                 user = entry;
             }
         }

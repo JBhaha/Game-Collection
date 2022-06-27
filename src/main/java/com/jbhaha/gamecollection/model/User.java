@@ -6,7 +6,7 @@ package com.jbhaha.gamecollection.model;
 public class User {
 
     private String userUUID;
-    private String userName;
+    private String username;
     private String password;
     private String userRole;
 
@@ -30,16 +30,16 @@ public class User {
      * UserName getter
      * @return userName
      */
-    public String getUserName() {
-        return userName;
+    public String getUsername() {
+        return username;
     }
 
     /**
      * UserName setter
-     * @param userName
+     * @param username
      */
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     /**

@@ -32,6 +32,7 @@ public class Config extends Application {
         providers.add(com.jbhaha.gamecollection.service.GameService.class);
         providers.add(com.jbhaha.gamecollection.service.FranchiseService.class);
         providers.add(com.jbhaha.gamecollection.service.StudioService.class);
+        providers.add(com.jbhaha.gamecollection.service.UserService.class);
         return providers;
     }
 

@@ -39,6 +39,7 @@ public final class DataHandler {
         DataHandler.setGameList(null);
         DataHandler.setFranchiseList(null);
         DataHandler.setStudioList(null);
+        DataHandler.setUserList(null);
     }
 
     /**
@@ -218,9 +219,9 @@ public final class DataHandler {
 
     public String readUserRole(String username, String password) {
         for (User user : getUserList()) {
-            if (user.getUserName().equals(username) &&
+            if (user.getUsername().equals(username) &&
                     user.getPassword().equals(password)) {
-                return user.getUserName();
+                return user.getUsername();
             }
         }
         return "guest";
