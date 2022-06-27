@@ -25,12 +25,22 @@ public class FranchiseService {
     @GET
     @Path("list")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response listFranchises() {
+    public Response listFranchises(
+            @CookieParam("role") String role
+    ) {
 
-        List<Franchise> franchiseMap = DataHandler.readAllFranchises();
+        int httpStatus;
+        List<Franchise> franchiseMap = null;
+
+        if (role.equals("guest") || role == null){
+            httpStatus = 403;
+        } else {
+            httpStatus = 200;
+            franchiseMap = DataHandler.readAllFranchises();
+        }
 
         return Response
-                .status(200)
+                .status(httpStatus)
                 .entity(franchiseMap)
                 .build();
     }
@@ -44,20 +54,25 @@ public class FranchiseService {
     @Path("read")
     @Produces(MediaType.APPLICATION_JSON)
     public Response readFranchise(
-            @QueryParam("uuid") String franchiseUUID
+            @QueryParam("uuid") String franchiseUUID,
+            @CookieParam("role") String role
     ){
         Franchise franchise = null;
         int httpStatus;
 
-        try {
-            franchise = DataHandler.readFranchiseByUUID(franchiseUUID);
-            if (franchise == null){
-                httpStatus = 404;
-            } else {
-                httpStatus = 200;
+        if (role.equals("guest") || role == null){
+            httpStatus = 403;
+        } else {
+            try {
+                franchise = DataHandler.readFranchiseByUUID(franchiseUUID);
+                if (franchise == null){
+                    httpStatus = 404;
+                } else {
+                    httpStatus = 200;
+                }
+            } catch (IllegalArgumentException argEx){
+                httpStatus = 400;
             }
-        } catch (IllegalArgumentException argEx){
-            httpStatus = 400;
         }
 
         return Response
@@ -71,12 +86,18 @@ public class FranchiseService {
     @Produces(MediaType.TEXT_PLAIN)
     public Response deleteFranchise(
             @Pattern(regexp = "[0-9a-fA-F]{8}-([0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}")
-            @QueryParam("uuid") String franchiseUUID
+            @QueryParam("uuid") String franchiseUUID,
+            @CookieParam("role") String role
     ){
         int httpStatus = 200;
-        if (!DataHandler.deleteFranchise(franchiseUUID)){
-            httpStatus = 410;
+        if (role.equals("admin")){
+            if (!DataHandler.deleteFranchise(franchiseUUID)){
+                httpStatus = 410;
+            }
+        } else {
+            httpStatus = 403;
         }
+
         return Response
                 .status(httpStatus)
                 .entity("")
@@ -88,13 +109,20 @@ public class FranchiseService {
     @Produces(MediaType.TEXT_PLAIN)
     public Response insertFranchise(
             @Valid @BeanParam Franchise newFranchise,
-            @FormParam("studioUUID") String studioUUID
+            @FormParam("studioUUID") String studioUUID,
+            @CookieParam("role") String role
     ){
-        newFranchise.setFranchiseUUID(UUID.randomUUID().toString());
-        newFranchise.setStudioUUID(studioUUID);
-        DataHandler.insertFranchise(newFranchise);
+        int httpStatus = 200;
+        if (role.equals("admin")){
+            newFranchise.setFranchiseUUID(UUID.randomUUID().toString());
+            newFranchise.setStudioUUID(studioUUID);
+            DataHandler.insertFranchise(newFranchise);
+        } else {
+            httpStatus = 403;
+        }
+
         return Response
-                .status(200)
+                .status(httpStatus)
                 .entity("")
                 .build();
     }
@@ -103,21 +131,27 @@ public class FranchiseService {
     @Path("update")
     @Produces(MediaType.TEXT_PLAIN)
     public Response updateFranchise(
-            @Valid @BeanParam Franchise changedFranchise
+            @Valid @BeanParam Franchise changedFranchise,
+            @CookieParam("role") String role
     ){
         int httpStatus = 200;
-        Franchise franchise = DataHandler.readFranchiseByUUID(changedFranchise.getFranchiseUUID());
-        if (franchise != null){
-            franchise.setFranchise(changedFranchise.getFranchise());
-            franchise.setGenre(changedFranchise.getGenre());
-            franchise.setGames(changedFranchise.getGames());
-            franchise.setStudio(changedFranchise.getStudio());
-            franchise.setGameList(changedFranchise.getGameList());
+        if (role.equals("admin")){
+            Franchise franchise = DataHandler.readFranchiseByUUID(changedFranchise.getFranchiseUUID());
+            if (franchise != null){
+                franchise.setFranchise(changedFranchise.getFranchise());
+                franchise.setGenre(changedFranchise.getGenre());
+                franchise.setGames(changedFranchise.getGames());
+                franchise.setStudio(changedFranchise.getStudio());
+                franchise.setGameList(changedFranchise.getGameList());
 
-            DataHandler.updateFranchise();
-        } else{
-            httpStatus = 410;
+                DataHandler.updateFranchise();
+            } else{
+                httpStatus = 410;
+            }
+        } else {
+            httpStatus = 403;
         }
+
         return Response
                 .status(httpStatus)
                 .entity("")

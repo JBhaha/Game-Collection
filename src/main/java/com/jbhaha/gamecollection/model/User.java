@@ -8,7 +8,7 @@ public class User {
     private String userUUID;
     private String username;
     private String password;
-    private String userRole;
+    private String role;
 
     /**
      * UserUUID getter
@@ -62,15 +62,15 @@ public class User {
      * UserRole getter
      * @return userRole
      */
-    public String getUserRole() {
-        return userRole;
+    public String getRole() {
+        return role;
     }
 
     /**
      * UserRole setter
-     * @param userRole
+     * @param role
      */
-    public void setUserRole(String userRole) {
-        this.userRole = userRole;
+    public void setRole(String role) {
+        this.role = role;
     }
 }

@@ -26,12 +26,20 @@ public class GameService {
     @GET
     @Path("list")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response listGames() {
-
-        List<Game> gameMap = DataHandler.readAllGames();
+    public Response listGames(
+            @CookieParam("role") String role
+    ) {
+        int httpStatus;
+        List<Game> gameMap = null;
+        if (role.equals("guest") || role == null){
+            httpStatus = 403;
+        } else {
+            httpStatus = 200;
+            gameMap = DataHandler.readAllGames();
+        }
 
         return Response
-                .status(200)
+                .status(httpStatus)
                 .entity(gameMap)
                 .build();
     }
@@ -47,21 +55,27 @@ public class GameService {
     public Response readGame(
             @NotEmpty
             @Pattern(regexp = "[0-9a-fA-F]{8}-([0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}")
-            @QueryParam("uuid") String gameUUID
+            @QueryParam("uuid") String gameUUID,
+            @CookieParam("role") String role
     ){
         Game game = null;
         int httpStatus;
 
-        try {
-            game = DataHandler.readGameByUUID(gameUUID);
-            if (game == null){
-                httpStatus = 404;
-            } else {
-                httpStatus = 200;
+        if (role.equals("guest") || role == null){
+            httpStatus = 403;
+        } else{
+            try {
+                game = DataHandler.readGameByUUID(gameUUID);
+                if (game == null){
+                    httpStatus = 404;
+                } else {
+                    httpStatus = 200;
+                }
+            } catch (IllegalArgumentException argEx){
+                httpStatus = 400;
             }
-        } catch (IllegalArgumentException argEx){
-            httpStatus = 400;
         }
+
 
         return Response
                 .status(httpStatus)
@@ -75,12 +89,18 @@ public class GameService {
     public Response deleteGame(
             @NotEmpty
             @Pattern(regexp = "[0-9a-fA-F]{8}-([0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}")
-            @QueryParam("uuid") String gameUUID
+            @QueryParam("uuid") String gameUUID,
+            @CookieParam("role") String role
     ){
         int httpStatus = 200;
-        if (!DataHandler.deleteGame(gameUUID)){
-            httpStatus = 410;
+        if (role.equals("admin")){
+            if (!DataHandler.deleteGame(gameUUID)){
+                httpStatus = 410;
+            }
+        } else {
+            httpStatus = 403;
         }
+
         return Response
                 .status(httpStatus)
                 .entity("")
@@ -92,13 +112,19 @@ public class GameService {
     @Produces(MediaType.TEXT_PLAIN)
     public Response insertBook(
             @Valid @BeanParam Game newGame,
-            @FormParam("release") String release
+            @FormParam("release") String release,
+            @CookieParam("role") String role
     ){
-        newGame.setGameUUID(UUID.randomUUID().toString());
-        newGame.setReleaseWithString(release);
-        DataHandler.insertGame(newGame);
+        int httpStatus = 200;
+        if (role.equals("admin")){
+            newGame.setGameUUID(UUID.randomUUID().toString());
+            newGame.setReleaseWithString(release);
+            DataHandler.insertGame(newGame);
+        } else {
+            httpStatus = 403;
+        }
         return Response
-                .status(200)
+                .status(httpStatus)
                 .entity("")
                 .build();
     }
@@ -108,17 +134,23 @@ public class GameService {
     @Produces(MediaType.TEXT_PLAIN)
     public Response updateGame(
             @Valid @BeanParam Game changedGame,
-            @FormParam("release") String release
+            @FormParam("release") String release,
+            @CookieParam("role") String role
     ){
         int httpStatus = 200;
-        Game game = DataHandler.readGameByUUID(changedGame.getGameUUID());
-        if (game != null){
-            game.setTitle(changedGame.getTitle());
-            game.setReleaseWithString(release);
-            DataHandler.updateGame();
-        } else{
-            httpStatus = 410;
+        if (role.equals("admin")){
+            Game game = DataHandler.readGameByUUID(changedGame.getGameUUID());
+            if (game != null){
+                game.setTitle(changedGame.getTitle());
+                game.setReleaseWithString(release);
+                DataHandler.updateGame();
+            } else{
+                httpStatus = 410;
+            }
+        } else {
+            httpStatus = 403;
         }
+
         return Response
                 .status(httpStatus)
                 .entity("")

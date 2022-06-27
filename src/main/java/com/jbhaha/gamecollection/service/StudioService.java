@@ -25,12 +25,21 @@ public class StudioService {
     @GET
     @Path("list")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response listStudios() {
+    public Response listStudios(
+            @CookieParam("role") String role
+    ) {
+        int httpStatus;
+        List<Studio> studioMap = null;
+        if (role.equals("guest") || role == null){
+            httpStatus = 403;
+        } else {
+            httpStatus = 200;
+            studioMap = DataHandler.readAllStudios();
+        }
 
-        List<Studio> studioMap = DataHandler.readAllStudios();
 
         return Response
-                .status(200)
+                .status(httpStatus)
                 .entity(studioMap)
                 .build();
     }
@@ -44,20 +53,25 @@ public class StudioService {
     @Path("read")
     @Produces(MediaType.APPLICATION_JSON)
     public Response readStudio(
-            @QueryParam("uuid") String studioUUID
+            @QueryParam("uuid") String studioUUID,
+            @CookieParam("role") String role
     ){
         Studio studio = null;
         int httpStatus;
 
-        try {
-            studio = DataHandler.readStudioByUUID(studioUUID);
-            if (studio == null){
-                httpStatus = 404;
-            } else {
-                httpStatus = 200;
+        if (role.equals("guest") || role == null){
+            try {
+                studio = DataHandler.readStudioByUUID(studioUUID);
+                if (studio == null){
+                    httpStatus = 404;
+                } else {
+                    httpStatus = 200;
+                }
+            } catch (IllegalArgumentException argEx){
+                httpStatus = 400;
             }
-        } catch (IllegalArgumentException argEx){
-            httpStatus = 400;
+        } else {
+            httpStatus = 403;
         }
 
         return Response
@@ -71,12 +85,18 @@ public class StudioService {
     @Produces(MediaType.TEXT_PLAIN)
     public Response deleteStudio(
             @Pattern(regexp = "[0-9a-fA-F]{8}-([0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}")
-            @QueryParam("uuid") String studioUUID
+            @QueryParam("uuid") String studioUUID,
+            @CookieParam("role") String role
     ){
         int httpStatus = 200;
-        if (!DataHandler.deleteStudio(studioUUID)){
-            httpStatus = 410;
+        if (role.equals("admin")){
+            if (!DataHandler.deleteStudio(studioUUID)){
+                httpStatus = 410;
+            }
+        } else {
+            httpStatus = 403;
         }
+
         return Response
                 .status(httpStatus)
                 .entity("")
@@ -88,11 +108,18 @@ public class StudioService {
     @Produces(MediaType.TEXT_PLAIN)
     public Response insertStudio(
             @Valid @BeanParam Studio newStudio,
-            @FormParam("founded") String founded
+            @FormParam("founded") String founded,
+            @CookieParam("role") String role
     ){
-        newStudio.setStudioUUID(UUID.randomUUID().toString());
-        newStudio.setFoundedUsingString(founded);
-        DataHandler.insertStudio(newStudio);
+        int httpStatus = 200;
+        if (role.equals("admin")){
+            newStudio.setStudioUUID(UUID.randomUUID().toString());
+            newStudio.setFoundedUsingString(founded);
+            DataHandler.insertStudio(newStudio);
+        } else {
+            httpStatus = 403;
+        }
+
         return Response
                 .status(200)
                 .entity("")
@@ -104,20 +131,25 @@ public class StudioService {
     @Produces(MediaType.TEXT_PLAIN)
     public Response updateStudio(
             @Valid @BeanParam Studio changedStudio,
-            @FormParam("founded") String founded
+            @FormParam("founded") String founded,
+            @CookieParam("role") String role
     ){
         int httpStatus = 200;
-        Studio studio = DataHandler.readStudioByUUID(changedStudio.getStudioUUID());
-        if (studio != null){
-            studio.setStudio(changedStudio.getStudio());
-            studio.setFoundedUsingString(founded);
-            studio.setLocation(changedStudio.getLocation());
+        if (role.equals("admin")){
+            Studio studio = DataHandler.readStudioByUUID(changedStudio.getStudioUUID());
+            if (studio != null){
+                studio.setStudio(changedStudio.getStudio());
+                studio.setFoundedUsingString(founded);
+                studio.setLocation(changedStudio.getLocation());
 
-
-            DataHandler.updateStudio();
-        } else{
-            httpStatus = 410;
+                DataHandler.updateStudio();
+            } else{
+                httpStatus = 410;
+            }
+        } else {
+            httpStatus = 403;
         }
+
         return Response
                 .status(httpStatus)
                 .entity("")
