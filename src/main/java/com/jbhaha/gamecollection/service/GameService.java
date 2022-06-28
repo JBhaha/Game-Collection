@@ -9,7 +9,6 @@ import javax.validation.constraints.Pattern;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import java.time.LocalDate;
 import java.util.List;
 import java.util.UUID;
 
@@ -83,6 +82,12 @@ public class GameService {
                 .build();
     }
 
+    /**
+     * deletes one game
+     * @param gameUUID
+     * @param role
+     * @return response
+     */
     @DELETE
     @Path("delete")
     @Produces(MediaType.TEXT_PLAIN)
@@ -107,10 +112,17 @@ public class GameService {
                 .build();
     }
 
+    /**
+     * creates a new game
+     * @param newGame
+     * @param release
+     * @param role
+     * @return response
+     */
     @POST
     @Path("create")
     @Produces(MediaType.TEXT_PLAIN)
-    public Response insertBook(
+    public Response insertGame(
             @Valid @BeanParam Game newGame,
             @FormParam("release") String release,
             @CookieParam("role") String role
@@ -129,6 +141,13 @@ public class GameService {
                 .build();
     }
 
+    /**
+     * changes an already existing game
+     * @param changedGame
+     * @param release
+     * @param role
+     * @return response
+     */
     @PUT
     @Path("update")
     @Produces(MediaType.TEXT_PLAIN)

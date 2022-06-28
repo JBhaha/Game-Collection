@@ -8,9 +8,18 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.NewCookie;
 import javax.ws.rs.core.Response;
 
+/**
+ * UserService class
+ */
 @Path("user")
 public class UserService {
 
+    /**
+     * login service
+     * @param username
+     * @param password
+     * @return response
+     */
     @POST
     @Path("login")
     @Produces(MediaType.TEXT_PLAIN)
@@ -44,6 +53,10 @@ public class UserService {
                 .build();
     }
 
+    /**
+     * logout service
+     * @return response
+     */
     @DELETE
     @Path("logout")
     @Produces(MediaType.TEXT_PLAIN)

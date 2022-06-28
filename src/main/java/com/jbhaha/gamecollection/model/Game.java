@@ -77,6 +77,10 @@ public class Game {
         this.release = release;
     }
 
+    /**
+     * Release setter using String
+     * @param release
+     */
     public void setReleaseWithString(String release){
         this.release = LocalDate.parse(release);
     }

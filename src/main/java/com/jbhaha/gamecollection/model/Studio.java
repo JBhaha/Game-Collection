@@ -10,7 +10,6 @@ import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 import javax.ws.rs.FormParam;
 import java.time.LocalDate;
-import java.util.LinkedHashMap;
 
 /**
  * Studio model class
@@ -83,6 +82,10 @@ public class Studio {
         this.founded = founded;
     }
 
+    /**
+     * Founded setter using String
+     * @param founded
+     */
     public void setFoundedUsingString(String founded){
         this.founded = LocalDate.parse(founded);
     }

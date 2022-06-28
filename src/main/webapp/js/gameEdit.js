@@ -1,6 +1,6 @@
 /**
  * view-controller for gameEdit.html
- * @author Marcel Suter
+ * @author Jakub Korona
  */
 document.addEventListener("DOMContentLoaded", () => {
     readGame();
@@ -82,19 +82,11 @@ function readGame() {
  * @param data  the game-data
  */
 function showGame(data) {
-    const userRole = getCookie("userRole");
+    const userRole = getCookie("role");
     document.getElementById("gameUUID").value = data.gameUUID;
     document.getElementById("title").value = data.title;
     document.getElementById("release").value = data.release;
 
     const locked =  !(userRole === "user" || userRole === "admin");
     lockForm("gameEditForm", locked);
-}
-
-/**
- * redirects to the bookshelf
- * @param event  the click-event
- */
-function cancelEdit(event) {
-    window.location.href = "./bookshelf.html";
 }

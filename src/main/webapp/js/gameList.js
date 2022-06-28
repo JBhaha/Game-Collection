@@ -1,6 +1,6 @@
 /**
- * view-controller for gameEdit.html
- * @author Marcel Suter
+ * view-controller for gameList.html
+ * @author Jakub Korona
  */
 document.addEventListener("DOMContentLoaded", () => {
     readGames();
@@ -35,7 +35,7 @@ function readGames() {
  * @param data the games
  */
 function showGameList(data){
-    let tBody = document.getElementById("booklist");
+    let tBody = document.getElementById("gameList");
     tBody.innerHTML = "";
     data.forEach(game => {
         let row = tBody.insertRow(-1);

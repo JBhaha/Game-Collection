@@ -5,6 +5,7 @@ import com.jbhaha.gamecollection.data.DataHandler;
 import org.hibernate.validator.constraints.Range;
 
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 import javax.ws.rs.FormParam;
 import java.util.ArrayList;
@@ -17,6 +18,7 @@ import java.util.Vector;
 public class Franchise {
 
     @FormParam("franchiseUUID")
+    @Pattern(regexp= "|[0-9a-fA-F]{8}-([0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}")
     private String franchiseUUID;
 
     @FormParam("franchise")
@@ -39,7 +41,10 @@ public class Franchise {
     @JsonIgnore
     private Vector<Game> gameList = new Vector<>();
 
-
+    /**
+     * studioUUID setter
+     * @param studioUUID
+     */
     public void setStudioUUID(String studioUUID){
         setStudio(new Studio());
         Studio studio = DataHandler.readStudioByUUID(studioUUID);
@@ -137,6 +142,10 @@ public class Franchise {
         }
     }
 
+    /**
+     * gameUUIDList getter
+     * @return gameUUIDList
+     */
     public Vector<String> getGameUUIDList(){
         Vector<String> gameUUIDList = new Vector<>();
         ListIterator<Game> iterator = gameList.listIterator();
@@ -147,12 +156,10 @@ public class Franchise {
         return gameUUIDList;
     }
 
-    /**public void setGameUUIDListWithList(Vector<String> gameUUIDList){
-        Vector<String> arrayList = new Vector<>();
-        arrayList.addAll(gameUUIDList);
-        setGameListUsingUUIDs(arrayList);
-    }*/
-
+    /**
+     * studioUUID getter
+     * @return studioUUID
+     */
     public String getStudioUUID(){
         if (getStudio()== null) return null;
         return getStudio().getStudioUUID();

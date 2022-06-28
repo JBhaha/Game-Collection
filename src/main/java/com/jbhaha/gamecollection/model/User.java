@@ -27,7 +27,7 @@ public class User {
     }
 
     /**
-     * UserName getter
+     * Username getter
      * @return userName
      */
     public String getUsername() {
@@ -35,7 +35,7 @@ public class User {
     }
 
     /**
-     * UserName setter
+     * Username setter
      * @param username
      */
     public void setUsername(String username) {
@@ -59,7 +59,7 @@ public class User {
     }
 
     /**
-     * UserRole getter
+     * Role getter
      * @return userRole
      */
     public String getRole() {
@@ -67,7 +67,7 @@ public class User {
     }
 
     /**
-     * UserRole setter
+     * Role setter
      * @param role
      */
     public void setRole(String role) {

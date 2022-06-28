@@ -8,7 +8,6 @@ import javax.validation.constraints.Pattern;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import java.time.LocalDate;
 import java.util.List;
 import java.util.UUID;
 
@@ -60,6 +59,8 @@ public class StudioService {
         int httpStatus;
 
         if (role == null || role.equals("guest")){
+            httpStatus = 403;
+        } else {
             try {
                 studio = DataHandler.readStudioByUUID(studioUUID);
                 if (studio == null){
@@ -70,8 +71,6 @@ public class StudioService {
             } catch (IllegalArgumentException argEx){
                 httpStatus = 400;
             }
-        } else {
-            httpStatus = 403;
         }
 
         return Response
@@ -80,6 +79,12 @@ public class StudioService {
                 .build();
     }
 
+    /**
+     * deletes one studio
+     * @param studioUUID
+     * @param role
+     * @return response
+     */
     @DELETE
     @Path("delete")
     @Produces(MediaType.TEXT_PLAIN)
@@ -103,6 +108,13 @@ public class StudioService {
                 .build();
     }
 
+    /**
+     * creates a new studio
+     * @param newStudio
+     * @param founded
+     * @param role
+     * @return response
+     */
     @POST
     @Path("create")
     @Produces(MediaType.TEXT_PLAIN)
@@ -126,6 +138,13 @@ public class StudioService {
                 .build();
     }
 
+    /**
+     * changes an already existing studio
+     * @param changedStudio
+     * @param founded
+     * @param role
+     * @return response
+     */
     @PUT
     @Path("update")
     @Produces(MediaType.TEXT_PLAIN)
