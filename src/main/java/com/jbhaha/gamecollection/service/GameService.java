@@ -31,7 +31,7 @@ public class GameService {
     ) {
         int httpStatus;
         List<Game> gameMap = null;
-        if (role.equals("guest") || role == null){
+        if (role == null || role.equals("guest")){
             httpStatus = 403;
         } else {
             httpStatus = 200;
@@ -61,7 +61,7 @@ public class GameService {
         Game game = null;
         int httpStatus;
 
-        if (role.equals("guest") || role == null){
+        if (role == null || role.equals("guest")){
             httpStatus = 403;
         } else{
             try {
@@ -93,7 +93,7 @@ public class GameService {
             @CookieParam("role") String role
     ){
         int httpStatus = 200;
-        if (role.equals("admin")){
+        if (role != null && role.equals("admin")){
             if (!DataHandler.deleteGame(gameUUID)){
                 httpStatus = 410;
             }
@@ -116,7 +116,7 @@ public class GameService {
             @CookieParam("role") String role
     ){
         int httpStatus = 200;
-        if (role.equals("admin")){
+        if (role != null && role.equals("admin")){
             newGame.setGameUUID(UUID.randomUUID().toString());
             newGame.setReleaseWithString(release);
             DataHandler.insertGame(newGame);
@@ -138,7 +138,7 @@ public class GameService {
             @CookieParam("role") String role
     ){
         int httpStatus = 200;
-        if (role.equals("admin")){
+        if (role != null && role.equals("admin")){
             Game game = DataHandler.readGameByUUID(changedGame.getGameUUID());
             if (game != null){
                 game.setTitle(changedGame.getTitle());

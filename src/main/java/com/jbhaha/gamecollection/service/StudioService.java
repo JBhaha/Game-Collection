@@ -30,7 +30,7 @@ public class StudioService {
     ) {
         int httpStatus;
         List<Studio> studioMap = null;
-        if (role.equals("guest") || role == null){
+        if (role == null || role.equals("guest")){
             httpStatus = 403;
         } else {
             httpStatus = 200;
@@ -59,7 +59,7 @@ public class StudioService {
         Studio studio = null;
         int httpStatus;
 
-        if (role.equals("guest") || role == null){
+        if (role == null || role.equals("guest")){
             try {
                 studio = DataHandler.readStudioByUUID(studioUUID);
                 if (studio == null){
@@ -89,7 +89,7 @@ public class StudioService {
             @CookieParam("role") String role
     ){
         int httpStatus = 200;
-        if (role.equals("admin")){
+        if (role != null && role.equals("admin")){
             if (!DataHandler.deleteStudio(studioUUID)){
                 httpStatus = 410;
             }
@@ -112,7 +112,7 @@ public class StudioService {
             @CookieParam("role") String role
     ){
         int httpStatus = 200;
-        if (role.equals("admin")){
+        if (role != null && role.equals("admin")){
             newStudio.setStudioUUID(UUID.randomUUID().toString());
             newStudio.setFoundedUsingString(founded);
             DataHandler.insertStudio(newStudio);
@@ -135,7 +135,7 @@ public class StudioService {
             @CookieParam("role") String role
     ){
         int httpStatus = 200;
-        if (role.equals("admin")){
+        if (role != null && role.equals("admin")){
             Studio studio = DataHandler.readStudioByUUID(changedStudio.getStudioUUID());
             if (studio != null){
                 studio.setStudio(changedStudio.getStudio());

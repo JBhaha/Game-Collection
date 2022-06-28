@@ -32,7 +32,7 @@ public class FranchiseService {
         int httpStatus;
         List<Franchise> franchiseMap = null;
 
-        if (role.equals("guest") || role == null){
+        if (role == null || role.equals("guest")){
             httpStatus = 403;
         } else {
             httpStatus = 200;
@@ -60,7 +60,7 @@ public class FranchiseService {
         Franchise franchise = null;
         int httpStatus;
 
-        if (role.equals("guest") || role == null){
+        if (role == null || role.equals("guest")){
             httpStatus = 403;
         } else {
             try {
@@ -90,7 +90,7 @@ public class FranchiseService {
             @CookieParam("role") String role
     ){
         int httpStatus = 200;
-        if (role.equals("admin")){
+        if (role != null && role.equals("admin")){
             if (!DataHandler.deleteFranchise(franchiseUUID)){
                 httpStatus = 410;
             }
@@ -113,7 +113,7 @@ public class FranchiseService {
             @CookieParam("role") String role
     ){
         int httpStatus = 200;
-        if (role.equals("admin")){
+        if (role != null && role.equals("admin")){
             newFranchise.setFranchiseUUID(UUID.randomUUID().toString());
             newFranchise.setStudioUUID(studioUUID);
             DataHandler.insertFranchise(newFranchise);
@@ -135,7 +135,7 @@ public class FranchiseService {
             @CookieParam("role") String role
     ){
         int httpStatus = 200;
-        if (role.equals("admin")){
+        if (role != null && role.equals("admin")){
             Franchise franchise = DataHandler.readFranchiseByUUID(changedFranchise.getFranchiseUUID());
             if (franchise != null){
                 franchise.setFranchise(changedFranchise.getFranchise());
